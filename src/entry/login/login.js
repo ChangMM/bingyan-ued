@@ -1,33 +1,22 @@
 /* eslint-disable no-new */
-require('../../scss/admin.scss')
+require('../../scss/login.scss')
 import Vue from 'vue'
 import VueResource from 'vue-resource'
-import VueRouter from 'vue-router'
 import Header from './Header.vue'
-import Nav from './Nav.vue'
-import Main from './Main.vue'
+import Login from './Login.vue'
+import Footer from './Footer.vue'
 let WarnPlugin = require('../../components/Warn/Warn.js')
 // 注册全局函数
 import Util from '../../js/Util.js'
-import Filter from '../../js/Filter.js'
 Util(Vue)
-Filter(Vue)
-
+// 主面板
 Vue.use(VueResource)
-Vue.use(VueRouter)
 Vue.use(WarnPlugin)
 Vue.http.options.emulateJSON = true
-let routes = [
-  {path: '/', redirect: '/main'},
-  {path: '/main', component: Main}
-]
-let router = new VueRouter({
-  routes: routes
-})
 new Vue({
-  router: router,
   components: {
     'header-component': Header,
-    'nav-component': Nav
+    'footer-component': Footer,
+    'login-component': Login
   }
 }).$mount('#app')

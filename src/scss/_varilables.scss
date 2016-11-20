@@ -1,0 +1,37 @@
+$main-width:               950px;
+//文章宽高设置
+$article-width:            285px;
+//文章封面图片宽高
+$article-img-width:        $article-width;
+$article-img-height:        190px;
+
+//===============================
+//网站所用颜色设置
+
+//相关颜色值得变量
+$baseTextColor:            #999;
+$mask-color:               rgba(0,0,0,0.4);
+$body-background-color:    #f8f9fb;
+$border-color:             #ddd;
+$light-black:              #999;
+$header-color:             #282b30;
+$main-left-color:          #f8f9fb;
+
+//不同组的颜色
+$bingyan-color:            #fcae26;
+$home-color:               #913bb6;
+$pm-color:                 #bd0553;
+$vd-color:                 #ed8140;
+$id-color:                 #f8df3a;
+$rd-color:                 #9ccd00;
+$fe-color:                 #0097c8;
+$about-color:              orange;
+
+//文章状态颜色
+$pass:                    #209361;
+$reject:                  #FF2528;
+$wait:                    #453816;
+$cancel:                  #aaa;
+
+//定义处理nav循环时的数组
+$nav-list:(pm:#bd0553,id:#f8df3a,rd:#9ccd00,vd:#ed8140,fe:#0097c8);

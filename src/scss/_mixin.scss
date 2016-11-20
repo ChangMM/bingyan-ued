@@ -1,0 +1,35 @@
+//背景图居中
+@mixin bgCenter($imgUrl,$color:$main-left-color){
+  background: {
+    color:$color;
+    image: url($imgUrl);
+    repeat: no-repeat;
+    position: center;
+  }
+  @include background-size(cover);
+}
+
+// 做个圆形
+@mixin circle($r){
+  height:$r;
+  width:$r;
+  border-radius: $r/2;
+}
+
+// 媒体查询时的缓动变化
+@mixin media-ease(){
+  transition: all  ease-out 0.3s;
+  -webkit-transition: all ease-out 0.3s;
+  -moz-transition:all ease-out 0.3s;
+}
+
+@mixin media-ease-delay($time:0.3s){
+  transition: all 0.3s ease-out $time;
+  -webkit-transition: all 0.3s ease-out $time;
+  -moz-transition:all 0.3s ease-out $time;
+}
+
+// 缓动的动画
+@mixin transition-ease(){
+  @include media-ease();
+}

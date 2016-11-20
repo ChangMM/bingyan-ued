@@ -1,0 +1,79 @@
+html,body,div,p,ul,li,h1,h2,h3,h4,input,textarea,dd,dt,dl,blockquote,b,span{
+  padding:0;
+  margin:0;
+}
+html{
+  font-family:"PingFangSC-Regular","Helvetica Neue", Helvetica, "Lantinghei SC", "Hiragino Sans GB", "Microsoft YaHei", 微软雅黑, STHeiti, "WenQuanYi Micro Hei", SimSun, sans-serif;
+  font-feature-settings: 'kern' 1;
+  text-rendering: geometricPrecision;
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: 1px;
+}
+input, textarea{
+  font-family:"PingFangSC-Regular","Helvetica Neue", Helvetica, "Lantinghei SC", "Hiragino Sans GB", "Microsoft YaHei", 微软雅黑, STHeiti, "WenQuanYi Micro Hei", SimSun, sans-serif;
+  letter-spacing: 1px;
+  font-feature-settings: 'kern' 1;
+  text-rendering: geometricPrecision;
+  line-height: 1.4;
+}
+a{
+  cursor: pointer;
+  text-decoration: none;
+  color:inherit;
+}
+
+//清除浮动
+.clearfix{
+  &:before,
+  &:after {
+    content: " "; // 1
+    display: table; // 2
+  }
+  &:after {
+    clear: both;
+  }
+  *zoom:1;
+}
+//禁止选择文本
+.select-no{
+  -moz-user-select:none;
+  -webkit-user-select:none;
+}
+
+// hover用户名的提示信息
+.top-tip{
+  position: relative;
+}
+.top-tip::before, .tip::after {
+  z-index: 99999;
+}
+.top-tip:hover::after {
+  text-align: center;
+  content:attr(data-tip);
+  display: inline-block;
+  position: absolute;
+  line-height: 12px;
+  padding: 6px 6px;
+  font-size: 12px;
+  color: #fff;
+  background-color: #fcae26;
+  border-radius: 2px;
+  top:-32px;
+  left: 50%;
+  transform: translate3d(-50%, 0, 0);
+}
+.top-tip:hover::before {
+  content: '';
+  display: block;
+  position: absolute;
+  height: 0;
+  width: 0;
+  border-top: 6px solid #fcae26;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  margin-left: -5px;
+  margin-top: 0;
+  top:-8px;
+  left: 50%;
+}

@@ -1,0 +1,37 @@
+@import "_base.scss";
+html,body{
+  height: 100%;
+}
+#app{
+  height:100%;
+  box-sizing:border-box;
+  padding-top:60px;
+}
+.main{
+  // 不知道为什么会有接近1px像素的误差    有空好好看下
+  min-height:99.9%;
+  width: 950px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 220px;
+  position: relative;
+  box-sizing: border-box;
+  //底部footer的距离
+  margin-bottom: -60px;
+  .main-left{
+    height:100%;
+    position: absolute;
+    top:0;
+    left:0;
+    width:220px;
+    z-index: 0;
+    background-color: #f8f9fb;
+  }
+  .main-right{
+    width:650px;
+    box-sizing: border-box;
+    margin-left: 80px;
+    //底部footer的距离
+    padding-bottom: 60px;
+  }
+}
