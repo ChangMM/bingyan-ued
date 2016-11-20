@@ -2,12 +2,12 @@
   <div class="menu-wrap">
     <dl class="menu">
       <dt class="menu-title">内容管理</dt>
-      <dd class="menu-item"><a href="#">发布的作品</a></dd>
-      <dd class="menu-item"><a href="#">作品库</a></dd>
+      <dd class="menu-item"><router-link :to="{path: '/released'}">发布的作品</router-link></dd>
+      <dd class="menu-item"><router-link :to="{path: '/articles'}">作品库</router-link></dd>
     </dl>
     <dl class="menu">
       <dt class="menu-title">设置</dt>
-      <dd class="menu-item"><a href="#">账号设置</a></dd>
+      <dd class="menu-item"><router-link :to="{path: '/setting'}">账号设置</router-link></dd>
       <!-- <dd class="menu-item new"><a href="#">订阅设置</a></dd> -->
       <!-- <dd class="menu-item"><a href="#">收益提现</a></dd> -->
     </dl>
@@ -29,7 +29,6 @@ export default {
 @import "../../scss/_varilables.scss";
 .menu-wrap{
   padding-right:20px;
-  margin-top: 20px;
 }
 .menu{
   .menu-title{
@@ -53,7 +52,7 @@ export default {
       background-color:$bingyan-color;
     }
     a{
-      &:hover,&.v-link-active{
+      &:hover,&.router-link-active{
         color:$bingyan-color;
       }
     }

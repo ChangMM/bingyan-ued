@@ -1,25 +1,20 @@
 @import "./_base.scss";
-html,body{
-  height: 100%;
-}
 #app{
-  height:100%;
   box-sizing:border-box;
   padding-top:60px;
 }
 .main{
-  // 不知道为什么会有接近1px像素的误差    有空好好看下
-  min-height:99.9%;
   width: 950px;
   margin-right: auto;
   margin-left: auto;
   padding-left: 160px;
+  padding-top: 20px;
   position: relative;
   box-sizing: border-box;
   .main-left{
     height:100%;
     position: absolute;
-    top:0;
+    top:20px;
     left:0;
     width:160px;
   }

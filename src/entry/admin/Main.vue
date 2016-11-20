@@ -73,7 +73,6 @@ export default {
 @import '../../scss/_varilables.scss';
 //主体样式控制
 .body-header{
-  padding-top: 20px;
   .header-item{
     width:32%;
     box-sizing: border-box;

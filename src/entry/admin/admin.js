@@ -6,6 +6,8 @@ import VueRouter from 'vue-router'
 import Header from './Header.vue'
 import Nav from './Nav.vue'
 import Main from './Main.vue'
+import Released from './released/Released.vue'
+import Articles from './articles/Articles.vue'
 let WarnPlugin = require('../../components/Warn/Warn.js')
 // 注册全局函数
 import Util from '../../js/Util.js'
@@ -19,7 +21,9 @@ Vue.use(WarnPlugin)
 Vue.http.options.emulateJSON = true
 let routes = [
   {path: '/', redirect: '/main'},
-  {path: '/main', component: Main}
+  {path: '/main', component: Main},
+  {path: '/released', component: Released},
+  {path: '/articles', component: Articles}
 ]
 let router = new VueRouter({
   routes: routes
