@@ -8,6 +8,7 @@ import Nav from './Nav.vue'
 import Main from './Main.vue'
 import Released from './released/Released.vue'
 import Articles from './articles/Articles.vue'
+import Account from './setting/Account.vue'
 let WarnPlugin = require('../../components/Warn/Warn.js')
 // 注册全局函数
 import Util from '../../js/Util.js'
@@ -23,7 +24,8 @@ let routes = [
   {path: '/', redirect: '/main'},
   {path: '/main', component: Main},
   {path: '/released', component: Released},
-  {path: '/articles', component: Articles}
+  {path: '/articles', component: Articles},
+  {path: '/setting', component: Account}
 ]
 let router = new VueRouter({
   routes: routes
