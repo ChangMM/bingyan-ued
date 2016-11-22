@@ -15,7 +15,7 @@
       <a href="/new.html"><span class="button solid-button">新建作品</span></a>
     </div>
     <p class="sub-title">已发布</p>
-    <Articles :published.sync='m_released'></Articles>
+    <Articles :published='m_released' :refresh='f_get_released_articles'></Articles>
   </div>
 </template>
 

@@ -21,7 +21,7 @@
             <span class="data-info">{{lib.article_date | timeFormat}}</span>
             <p class="operation-wrap">
               <span class="action">编辑</span>
-              <span class="action">删除</span>
+              <span class="action" v-on:click="f_cancel_article(lib.article_id)">删除</span>
             </p>
           </div>
         </div>
@@ -70,6 +70,22 @@ export default {
           this.m_libs = body.data
         }
       })
+    },
+    f_cancel_article: function (articleId) {
+      this.$confirm().then(function () {
+        this.$http.post('/api/user/article/cancel', {
+          article_id: articleId
+        }).then(function (response) {
+          let body = response.body
+          if (body.status === 1) {
+            this.$warn('删除成功', function () {
+              this.f_get_rejected_articles()
+            }.bind(this))
+          } else {
+            this.$warn(body.msg)
+          }
+        })
+      }.bind(this))
     }
   }
 }

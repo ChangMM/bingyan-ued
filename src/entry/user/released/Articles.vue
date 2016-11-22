@@ -11,7 +11,7 @@
         <div class="float-right info-wrap">
           <span class="data-info">{{article.like_num}}赞·{{article.comment_num}}阅读·{{article.share_num}}分享·{{article.article_date | timeFormat}}</span>
           <p class="operation-wrap">
-            <span class="action">删除</span>
+            <span class="action" v-on:click="f_cancel_article(article.article_id)">删除</span>
           </p>
         </div>
       </div>
@@ -38,8 +38,25 @@ export default {
       return _.orderBy(this.published, ['updateTime'], ['desc'])
     }
   },
-  props: ['published'],
-  methods: {}
+  props: ['published', 'refresh'],
+  methods: {
+    f_cancel_article: function (articleId) {
+      this.$confirm().then(function () {
+        this.$http.post('/api/user/article/cancel', {
+          article_id: articleId
+        }).then(function (response) {
+          let body = response.body
+          if (body.status === 1) {
+            this.$warn('删除成功', function () {
+              this.refresh()
+            }.bind(this))
+          } else {
+            this.$warn(body.msg)
+          }
+        })
+      }.bind(this))
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>

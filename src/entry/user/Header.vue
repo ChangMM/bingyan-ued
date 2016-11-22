@@ -7,8 +7,8 @@
         <a href="#"><img src="../../assets/by_ideas_black.png" class="ued-logo" alt="Bingyan Ideas"/> </a>
       </div>
       <div class="mp-wrap">
-        <a href="#"><img v-bind:src="avatar" class="avatar" alt="砖栏头像" /></a>
-        <a href="#"><span class="name">{{ nickname }}</span></a> |
+        <router-link :to="{path: '/setting'}"><img v-bind:src="avatar" class="avatar" alt="砖栏头像" /></router-link>
+        <router-link :to="{path: '/setting'}"><span class="name">{{ nickname }}</span></router-link> |
         <a href="/loginout" id="logout">退出</a>
       </div>
     </div>
