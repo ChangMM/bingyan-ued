@@ -3,7 +3,7 @@
     <div class="pop-panel-mask">
       <div class="pop-panel-wrap">
         <div class="pop-panel-header">
-          头像修改
+          个人头像修改
           <div class="line"></div>
           <img src="../../../assets/close.png" v-on:click='f_close' class="close" />
         </div>

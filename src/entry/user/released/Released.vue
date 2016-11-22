@@ -15,7 +15,7 @@
       <a href="/new.html"><span class="button solid-button">新建作品</span></a>
     </div>
     <p class="sub-title">已发布</p>
-    <Articles :published.sync='m_published'></Articles>
+    <Articles :published.sync='m_released'></Articles>
   </div>
 </template>
 
@@ -24,25 +24,21 @@ import Articles from './Articles'
 export default {
   data () {
     return {
-      m_published: [
-        {
-          title: '曾经沧海难为水，除却巫山不是云',
-          digest: '青山在，绿水流，只记缘，不记仇',
-          cover: '/static/img/default_cover.png',
-          updateTime: new Date()
-        },
-        {
-          title: '曾经沧海难为水，除却巫山不是云',
-          digest: '青山在，绿水流，只记缘，不记仇',
-          cover: '/static/img/default_cover.png',
-          updateTime: new Date()
-        }
-      ]
+      m_released: []
     }
   },
   mounted () {
+    this.f_get_released_articles()
   },
   methods: {
+    f_get_released_articles: function () {
+      this.$http.get('/api/user/articles/checked').then(function (response) {
+        let body = response.body
+        if (body.status === 1) {
+          this.m_released = body.data
+        }
+      })
+    }
   },
   components: {
     Articles

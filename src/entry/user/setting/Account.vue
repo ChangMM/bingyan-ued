@@ -13,7 +13,7 @@
       <div class="input-wrap">
         <label for="avatar">名称</label>
         <span>{{m_nickname}}<span/>
-        <span class="float-right alter">修改</span>
+        <span class="float-right alter"  v-on:click='f_show_name_panel'>修改</span>
       </div>
       <div class="input-wrap textarea-wrap">
         <label for="avatar">个人主页</label>
@@ -23,19 +23,25 @@
       <div class="input-wrap textarea-wrap">
         <label for="avatar">个人简介</label>
         <span class="mult-line">{{m_intro}}</span>
-        <span class="float-right alter">修改</span>
+        <span class="float-right alter" v-on:click='f_show_intro_panel'>修改</span>
       </div>
     </div>
     <avatar-panel v-show="m_avatar_panel_show" :refresh='f_get_user_info' :content='m_avatar' v-on:close='f_close_avatar_panel'> </avatar-panel>
+    <intro-panel v-show="m_intro_panel_show" :refresh='f_get_user_info' :content='m_intro' v-on:close='f_close_intro_panel'> </intro-panel>
+    <name-panel v-show="m_name_panel_show" :refresh='f_get_user_info' :content='m_nickname' v-on:close='f_close_name_panel'> </name-panel>
   </div>
 </template>
 
 <script>
 import AvatarPanel from './AvatarPanel.vue'
+import IntroPanel from './IntroPanel.vue'
+import NamePanel from './NamePanel.vue'
 export default {
   data () {
     return {
       m_avatar_panel_show: false,
+      m_intro_panel_show: false,
+      m_name_panel_show: false,
       m_avatar: '',
       m_nickname: '',
       m_homepage: '',
@@ -62,10 +68,24 @@ export default {
     },
     f_close_avatar_panel: function () {
       this.m_avatar_panel_show = false
+    },
+    f_show_intro_panel: function () {
+      this.m_intro_panel_show = true
+    },
+    f_close_intro_panel: function () {
+      this.m_intro_panel_show = false
+    },
+    f_show_name_panel: function () {
+      this.m_name_panel_show = true
+    },
+    f_close_name_panel: function () {
+      this.m_name_panel_show = false
     }
   },
   components: {
-    AvatarPanel
+    AvatarPanel,
+    IntroPanel,
+    NamePanel
   }
 }
 </script>

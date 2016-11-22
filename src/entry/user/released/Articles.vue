@@ -2,19 +2,26 @@
   <div class="articles-wrap">
     <template v-if="published.length!=0">
       <div class="article-item clearfix" v-for="article in orderedPublished">
+        <span v-bind:class="['article-type',article.category.toLowerCase()]">{{article.category_full_name}}</span>
         <img v-bind:src="article.cover?article.cover:m_default_cover" class="article-cover" alt="封面图" />
         <div class="article-info">
           <span class="article-title">{{article.title}}</span>
-          <span class="article-intro">{{article.digest}}</span>
+          <span class="article-intro">{{article.intro}}</span>
         </div>
-        <div class="float-right time-wrap">
-          <span class="article-time">{{article.updateTime | timestampFormat}}</span>
-          <span class="cancel">删除</span>
+        <div class="float-right info-wrap">
+          <span class="data-info">{{article.like_num}}赞·{{article.comment_num}}阅读·{{article.share_num}}分享·{{article.article_date | timeFormat}}</span>
+          <p class="operation-wrap">
+            <span class="action">删除</span>
+          </p>
         </div>
       </div>
     </template>
     <template v-if="published.length==0">
-      <p class="no-article">暂无内容</p>
+      <p class="no-article">
+        <img src="http://newbbs.bingyan.net/assets/emojis/see_no_evil.png" class="emoji"/>
+        暂无内容
+        <img src="http://newbbs.bingyan.net/assets/emojis/see_no_evil.png" class="emoji"/>
+      </p>
     </template>
   </div>
 </template>
@@ -36,65 +43,5 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '../../../scss/_varilables.scss';
-.no-article{
-  font-size: 16px;
-  line-height: 50px;
-  height:50px;
-  text-align: center;
-}
-.article-item{
-  padding:15px 0;
-  border-bottom: 1px solid #eee;
-  position: relative;
-  .article-cover{
-    height:100px;
-    width:150px;
-    border-radius: 2px;
-  }
-  .article-info{
-    position: absolute;
-    left:170px;
-    top:15px;
-    height:100px;
-    width:200px;
-    .article-title{
-      display: inline-block;
-      font-size: 16px;
-      font-weight: bold;
-      line-height: 1;
-      vertical-align: top;
-      cursor: pointer;
-      &:hover{
-        text-decoration: underline;
-      }
-    }
-    .article-intro{
-      width:100%;
-      display: inline-block;
-      position: absolute;
-      bottom:0;
-      left:0;
-      color:#666;
-      vertical-align: text-bottom;
-    }
-  }
-  .time-wrap{
-    height:100px;
-    position: relative;
-    color:#999;
-    text-align: right;
-    min-width: 100px;
-    .cancel{
-      cursor: pointer;
-      position: absolute;
-      bottom:0;
-      right:0;
-      &:hover{
-        color:$bingyan-color;
-        text-decoration: underline;
-      }
-    }
-  }
-}
+@import '../../../scss/components/_user_article.scss';
 </style>
