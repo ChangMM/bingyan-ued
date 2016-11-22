@@ -14,6 +14,8 @@
 export default {
   data () {
     return {
+      m_nickname: '',
+      m_avatar: ''
     }
   }
 }

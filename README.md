@@ -51,6 +51,30 @@ mysql> desc article;
 | intro        | varchar(128) | NO   |     | NULL              |                             |
 +--------------+--------------+------+-----+-------------------+-----------------------------+
 ```
+```
+mysql> desc user;
++-------------------+---------------+------+-----+------------------------+----------------+
+| Field             | Type          | Null | Key | Default                | Extra          |
++-------------------+---------------+------+-----+------------------------+----------------+
+| uid               | int(4)        | NO   | PRI | NULL                   | auto_increment |
+| nickname          | varchar(64)   | NO   |     | NULL                   |                |
+| sex               | enum('M','F') | YES  |     | M                      |                |
+| birthday          | date          | YES  |     | 2000-01-01             |                |
+| picture           | varchar(64)   | YES  |     | NULL                   |                |
+| rank              | int(2)        | NO   |     | 0                      |                |
+| personal_homepage | varchar(64)   | YES  |     | /static/img/shiyan.jpg |                |
++-------------------+---------------+------+-----+------------------------+----------------+
+
+mysql> desc user_login;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| uid      | int(4)      | NO   | PRI | NULL    | auto_increment |
+| email    | varchar(32) | NO   |     | NULL    |                |
+| password | varchar(32) | NO   |     | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
+
+```
 ### 开发过程中的bug
 * 1、路由钩子的绑定问题
 * 2、transition过渡钩子的绑定问题

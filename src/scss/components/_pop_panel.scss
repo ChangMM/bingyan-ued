@@ -1,0 +1,83 @@
+@import "_button.scss";
+@import "../_varilables.scss";
+.pop-panel-mask{
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index: 9998;
+  transition: background ease .6s;
+  background: rgba(255, 255, 255, 0.9);
+}
+.pop-panel-wrap{
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding:20px 60px 40px 60px;
+  border-radius: 2px;
+  width:360px;
+  background-color: #fff;
+  box-shadow: 1px 1px 20px rgba(0,0,0,0.05),
+              -1px -1px 20px rgba(0,0,0,0.05);
+}
+.pop-panel-header{
+  padding:10px 0;
+  font-size:16px;
+  font-weight: bolder;
+  position:relative;
+  .line{
+    margin-top: 10px;
+    width:140px;
+    height:6px;
+    background-color: $bingyan-color;
+  }
+  .close{
+    position: absolute;
+    top:0;
+    right:-30px;
+    height:20px;
+    cursor: pointer;
+  }
+}
+.button-wrap{
+  margin-top: 30px;
+  text-align: center;
+}
+.button{
+  display: inline-block;
+  width:120px;
+  height:36px;
+  line-height: 36px;
+  border: 1px solid $bingyan-color;
+  cursor: pointer;
+  margin-right: 60px;
+  &:last-child{
+    margin-right: 0;
+  }
+  &.solid{
+    color:#fff;
+    background-color: $bingyan-color;
+    &:hover{
+      background-color: darken($bingyan-color,5%);
+    }
+  }
+  &.hollow{
+    color:$bingyan-color;
+    background-color: #fff;
+    &:hover{
+      color:#fff;
+      background-color: darken($bingyan-color,5%);
+    }
+  }
+}
+.pop-panel-wrap, .pop-panel-mask{
+  transition: all .2s ease;
+}
+.v-enter .pop-panel-mask, .v-leave-active .pop-panel-mask {
+  opacity: 0;
+}
+.v-enter .pop-panel-wrap, .v-leave-active .pop-panel-wrap{
+  transform:translate(-50%, -50%) scale(1.1);
+}

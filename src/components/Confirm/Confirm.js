@@ -1,6 +1,7 @@
 function install (Vue) {
   let AlertConstructor = Vue.extend(require('./Confirm.vue'))
   let alertInstance = null
+  let body = document.getElementsByTagName('body')[0]
 
   Vue.prototype.$confirm = function (message) {
     if (alertInstance) return
@@ -13,9 +14,14 @@ function install (Vue) {
           reject: ''
         }
       },
+      mounted () {
+        this.$nextTick(function () {
+          body.appendChild(this.$el)
+        })
+      },
       methods: {
         f_close: function () {
-          alertInstance.$remove()
+          this.$el.remove()
           alertInstance = null
         },
         f_cancel: function () {
@@ -28,14 +34,11 @@ function install (Vue) {
         }
       }
     })
-    alertInstance.$appendTo(document.body)
     return new Promise(function (resolve, reject) {
       alertInstance.resolve = resolve
       alertInstance.reject = reject
     })
   }
-
-  Vue.transition('confirmIn')
 }
 
 let MyPlugin = {

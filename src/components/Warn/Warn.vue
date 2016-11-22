@@ -4,7 +4,6 @@
       <p class="msg-wrap">{{ msg }}</p>
     </div>
   </transition>
-
 </template>
 
 <script>

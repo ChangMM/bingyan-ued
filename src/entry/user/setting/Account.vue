@@ -7,51 +7,66 @@
     <div class="account-body">
       <div class="input-wrap">
         <label for="avatar">头像</label>
-        <!-- <div class="input-avatar-wrap">
-          <input type="file" id="avatar-input" class="file-input" name="avatar" id="avatar">
-          <img v-bind:src="m_avatar?m_avatar:m_default_avatar" v-bind:style="avatarStyle" />
-        </div> -->
         <img v-bind:src="m_avatar" class="avatar-img" />
-        <span class="float-right alter">修改</span>
+        <span class="float-right alter" v-on:click='f_show_avatar_panel'>修改</span>
       </div>
       <div class="input-wrap">
         <label for="avatar">名称</label>
-        <span>{{m_name}}<span/>
+        <span>{{m_nickname}}<span/>
         <span class="float-right alter">修改</span>
       </div>
       <div class="input-wrap textarea-wrap">
         <label for="avatar">个人主页</label>
-        <span class="mult-line">{{m_link}}</span>
-        <!-- <textarea name="name" class="intro" v-model="m_intro"></textarea> -->
+        <span class="mult-line">{{m_homepage}}</span>
         <span class="float-right alter">修改</span>
       </div>
       <div class="input-wrap textarea-wrap">
         <label for="avatar">个人简介</label>
         <span class="mult-line">{{m_intro}}</span>
-        <!-- <textarea name="name" class="intro" v-model="m_works"></textarea> -->
         <span class="float-right alter">修改</span>
       </div>
     </div>
+    <avatar-panel v-show="m_avatar_panel_show" :refresh='f_get_user_info' :content='m_avatar' v-on:close='f_close_avatar_panel'> </avatar-panel>
   </div>
 </template>
 
 <script>
+import AvatarPanel from './AvatarPanel.vue'
 export default {
   data () {
     return {
-      m_avatar: '/static/img/logo.png',
-      m_name: '子矜',
-      m_intro: '渡尽劫波兄弟在，相逢一笑泯恩仇。',
-      m_link: 'https://github.com/ChangMM',
-      avatarStyle: {
-        width: '100%',
-        height: 'auto'
-      }
+      m_avatar_panel_show: false,
+      m_avatar: '',
+      m_nickname: '',
+      m_homepage: '',
+      m_intro: '',
+      m_rank: ''
     }
   },
-  ready () {
+  mounted () {
+    this.f_get_user_info()
   },
-  methods: {}
+  methods: {
+    f_get_user_info: function () {
+      this.$http.get('/api/user/info').then(function (response) {
+        let body = response.body
+        this.m_avatar = body.data.avatar
+        this.m_nickname = body.data.nickname
+        this.m_intro = body.data.intro
+        this.m_homepage = body.data.homepage
+        this.m_rank = body.data.rank
+      })
+    },
+    f_show_avatar_panel: function () {
+      this.m_avatar_panel_show = true
+    },
+    f_close_avatar_panel: function () {
+      this.m_avatar_panel_show = false
+    }
+  },
+  components: {
+    AvatarPanel
+  }
 }
 </script>
 
@@ -89,35 +104,6 @@ export default {
           display: inline-block;
           width: 600px;
         }
-        // .input-avatar-wrap{
-        //   display: inline-block;
-        //   vertical-align: middle;
-        //   overflow: hidden;
-        //   position: relative;
-        //   border-radius: 50%;
-        //   background-color: #eee;
-        //   width:40px;
-        //   height:40px;
-        //   input{
-        //     cursor: pointer;
-        //     opacity: 0;
-        //     position: absolute;
-        //     z-index: 1;
-        //     top:0;
-        //     left:0;
-        //     width:100%;
-        //     height:100%;
-        //     border-radius: 50%;
-        //   }
-        //   img{
-        //     position: absolute;
-        //     top:50%;
-        //     left:50%;
-        //     border-radius: 50%;
-        //     transform: translate3d(-50%,-50%,0);
-        //     z-index: 0;
-        //   }
-        // }
         .avatar-img{
           vertical-align: middle;
           height:40px;

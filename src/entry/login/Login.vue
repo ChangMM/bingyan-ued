@@ -63,7 +63,7 @@ export default {
       if (!this.f_check_login()) {
         return
       }
-      this.$http.post('/api/admin/login', {
+      this.$http.post('/api/login', {
         username: this.m_username,
         password: this.m_password
       }).then(function (response) {

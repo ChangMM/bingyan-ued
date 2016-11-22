@@ -14,7 +14,9 @@ module.exports = {
   entry: {
     index: './src/entry/index/index.js',
     admin: './src/entry/admin/admin.js',
-    login: './src/entry/login/login.js'
+    login: './src/entry/login/login.js',
+    user: './src/entry/user/user.js',
+    new: './src/entry/new/new.js'
   },
   output: {
     path: config.build.assetsRoot,

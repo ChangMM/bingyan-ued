@@ -9,7 +9,7 @@
       <div class="mp-wrap">
         <a href="#"><img v-bind:src="avatar" class="avatar" alt="砖栏头像" /></a>
         <a href="#"><span class="name">{{ nickname }}</span></a> |
-        <a href="/signout" id="logout">退出</a>
+        <a href="/loginout" id="logout">退出</a>
       </div>
     </div>
   </div>
@@ -21,6 +21,18 @@ export default {
     return {
       avatar: require('../../assets/logo.png'),
       nickname: '子矜'
+    }
+  },
+  mounted () {
+    this.f_get_usr_info()
+  },
+  methods: {
+    f_get_usr_info: function () {
+      this.$http.get('/api/user/info').then(function (response) {
+        let body = response.body
+        this.avatar = body.data.avatar
+        this.nickname = body.data.nickname
+      })
     }
   }
 }
