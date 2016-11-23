@@ -74,11 +74,11 @@ export default {
 <style lang="scss" scoped>
 @import '../../scss/_varilables.scss';
 @import '../../scss/_mixin.scss';
-$article-width: 285px;
-$article-img-height: 190px;
+$article-width: 300px;
+$article-img-height: 200px;
 .articles-wrap{
   padding-top: 30px;
-  margin-right: -80px;
+  margin-right: -50px;
 }
 .no-articles{
   height:40px;
@@ -92,7 +92,7 @@ $article-img-height: 190px;
   float:left;
   margin-bottom:30px;
   border-radius: 2px;
-  margin-right: 80px;
+  margin-right: 50px;
   width: $article-width;
   background-color: #f8f9fb;
   @include transition-ease;
@@ -141,6 +141,7 @@ $article-img-height: 190px;
   line-height: 1.5;
   font-size: 14px;
   display: inline-block;
+  height:42px;
   vertical-align: bottom;
   &:hover{
     text-decoration: underline;
@@ -170,11 +171,11 @@ $article-img-height: 190px;
       position: absolute;
     }
     .author-name{
-      top:0;
+      top:6px;
       color:$bingyan-color;
     }
     .article-time{
-      top:24px;
+      top:26px;
       color:$light-black;
     }
   }

@@ -44,6 +44,12 @@ module.exports = merge(baseWebpackConfig, {
       chunks:['login']
     }),
     new HtmlWebpackPlugin({
+      filename: 'new.html',
+      template: 'new.html',
+      inject: true,
+      chunks:['new']
+    }),
+    new HtmlWebpackPlugin({
       filename: 'admin.html',
       template: 'admin.html',
       inject: true,
