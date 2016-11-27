@@ -10,7 +10,7 @@
                   ·
                   <span class="article-time">{{ m_check_date | timeFormat }}</span>
                   ·
-                  <span class="comment-num">{{m_comment_num}}阅读</span>
+                  <span class="comment-num">{{m_comment_num}}评论</span>
                   <span class="like-num">{{m_like_num}}喜欢</span>
                   <span class="share-num">{{m_share_num}}分享</span>
                 </p>

@@ -35,6 +35,13 @@ module.exports = {
          pathRewrite: {
            '^/static/img': '/static/img'
          }
+      },
+      '/user': {
+         target: 'http://localhost:5000',
+         changeOrigin: true,
+         pathRewrite: {
+           '^/user': '/user'
+         }
       }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"
