@@ -17,7 +17,7 @@
                 <router-link :to="{ path: '/category/'+ m_category.toLowerCase() }" :class="'article-type '+ m_category.toLowerCase()">{{ m_category_full_name }}</router-link>
               </div>
           </div>
-          <div class="by-article-content wenzhang" v-html="m_article_content"></div>
+          <div class="by-article-content simditor-article" v-html="m_article_content"></div>
       </div>
       <div class="by-article-footer">
         <span class="article-copyright">© 版权归作者所有，转载请联系冰岩作坊</span>

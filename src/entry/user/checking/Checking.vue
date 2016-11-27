@@ -20,7 +20,7 @@
           <div class="float-right info-wrap">
             <span class="data-info">{{lib.article_date | timeFormat}}</span>
             <p class="operation-wrap">
-              <span class="action">编辑</span>
+              <span class="action" v-on:click="f_edit_article(lib.article_id)">编辑</span>
               <span class="action" v-on:click="f_cancel_article(lib.article_id)">删除</span>
             </p>
           </div>
@@ -38,6 +38,7 @@
 </template>
 
 <script>
+/* global location: true */
 import _ from 'lodash'
 export default {
   data () {
@@ -70,6 +71,9 @@ export default {
           this.m_libs = body.data
         }
       })
+    },
+    f_edit_article: function (articleId) {
+      location.href = '/new.html?id=' + articleId
     },
     f_cancel_article: function (articleId) {
       this.$confirm().then(function () {

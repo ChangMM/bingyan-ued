@@ -18,11 +18,11 @@
         <div class="cover-wrap">
           <p class="cover-tip tip">类型</p>
           <div class="article-type-wrap" v-on:click="f_choose_type($event)">
-            <span class="article-type fe" data-category='fe'>FE 前端</span>
-            <span class="article-type id" data-category='id'>ID 设计</span>
-            <span class="article-type vd" data-category='vd'>VD 视觉</span>
-            <span class="article-type rd" data-category='rd'>RD 研发</span>
-            <span class="article-type pm" data-category='pm'>PM 产品</span>
+            <span class="article-type pm" :class="{'active': m_category=='pm'}" data-category='pm'>PM 产品</span>
+            <span class="article-type vd" :class="{'active': m_category=='vd'}" data-category='vd'>VD 视觉</span>
+            <span class="article-type id" :class="{'active': m_category=='id'}" data-category='id'>ID 设计</span>
+            <span class="article-type fe" :class="{'active': m_category=='fe'}" data-category='fe'>FE 前端</span>
+            <span class="article-type rd" :class="{'active': m_category=='rd'}" data-category='rd'>RD 研发</span>
           </div>
         </div>
         <div class="abbr-cover">
@@ -53,10 +53,6 @@
 export default {
   data () {
     return {
-      coverStyle: {
-        width: 'auto',
-        height: 'auto'
-      },
       m_aid: '',
       m_cover: '',
       m_cover_default: require('../../assets/editBack.png'),
@@ -67,24 +63,23 @@ export default {
       m_preview: false,
       m_time: new Date(),
       m_content: '',
-      m_editor: null,
-      m_$editor: null
+      m_editor: null
     }
   },
   mounted () {
-    // // 绑定页面退出事件
-    // $(window).bind('beforeunload', function () {
-    //   return '您可能有数据没有保存'
-    // })
+    // 绑定页面退出事件
+    $(window).bind('beforeunload', function () {
+      return '您可能有数据没有保存'
+    })
     this.f_init_editor()
+    this.f_get_edit_content()
   },
   methods: {
     f_init_editor: function () {
-      let editor = new Simditor({
+      this.m_editor = new Simditor({
         textarea: $('#editor'),
         toolbar: ['title', 'bold', 'underline', 'color', '|', 'ul', 'blockquote', 'code', 'table', '|', 'link', 'image'],
         toolbarFloat: false,
-        // toolbarFloatOffset: '60px',
         tabIndent: true,
         defaultImage: '/static/img/default_cover.png',
         upload: {
@@ -111,30 +106,26 @@ export default {
           {name: 'SQL', value: 'sql'}
         ]
       })
-      console.log(editor)
     },
     f_get_edit_content: function () {
-      let pid = this.$parseUrl(location.href).params['pid']
-      if (!pid) {
-        console.log()
-      } else {
-        this.$http.get('/api/post', {
-          params: {
-            crsf: this.$cookies()['csrf'] || '',
-            postId: pid
-          }
-        }).then((response) => {
+      let id = this.$parseUrl(location.href).params['id']
+      if (id) {
+        this.$http.get('/api/user/article/' + id).then((response) => {
           let body = response.body
-          let post = body.post
-          this.m_title = post.title
-          this.m_abbr = post.digest
-          this.m_content = post.words
-          this.m_cover = post.images[0]
-          this.m_aid = pid
-          // 填充文章内容
-          this.m_$editor.html(this.m_content)
-          // 调整图片
-          this.f_image(this.m_cover)
+          if (body.status === 1) {
+            let data = body.data
+            this.m_title = data.title
+            this.m_abbr = data.intro
+            this.m_content = data.content
+            this.m_cover = data.cover
+            this.m_aid = data.article_id
+            this.m_category = data.category.toLowerCase()
+            this.m_category_full_name = data.category_full_name
+            // 填充文章内容
+            this.m_editor.setValue(this.m_content)
+          } else {
+            this.$warn(body.msg)
+          }
         })
       }
     },
@@ -178,10 +169,10 @@ export default {
       this.m_category_full_name = target.innerHTML
     },
     f_return: function () {
-      location.href = '/main#!/articles'
+      location.href = '/user.html'
     },
     f_save: function (event) {
-      this.m_content = this.m_$editor.html()
+      this.m_content = this.m_editor.getValue()
       if (!this.f_check_article()) {
         return
       }
@@ -191,17 +182,17 @@ export default {
       } else {
         currentTarget.classList.add('disable')
         currentTarget.innerHTML = '正在保存'
-        this.$http.post('/api/post', {
-          aid: this.m_aid,
-          csrf: this.$cookies()['csrf'] || '',
+        this.$http.post('/api/user/article/save', {
+          article_id: this.m_aid,
           title: this.m_title,
-          digest: this.m_abbr,
-          words: this.m_content,
-          cover: this.m_cover
+          intro: this.m_abbr,
+          cover: this.m_cover,
+          content: this.m_content,
+          category: this.m_category
         }).then((response) => {
           let body = response.body
-          if (body.error === 'ok') {
-            this.m_aid = body.post.id
+          if (body.status === 1) {
+            this.m_aid = body.data
             this.$warn('保存成功')
             currentTarget.innerHTML = '保存'
           } else {
@@ -213,7 +204,7 @@ export default {
       }
     },
     f_save_release: function (event) {
-      this.m_content = this.m_$editor.html()
+      this.m_content = this.m_editor.getValue()
       if (!this.f_check_article()) {
         return
       }
@@ -265,7 +256,7 @@ export default {
       })
     },
     f_preview: function () {
-      this.m_content = this.m_$editor.html()
+      this.m_content = this.m_editor.getValue()
       this.m_preview = true
       this.$fixBody()
     },
@@ -280,7 +271,9 @@ export default {
       }
       // 如果摘要为空摘要取正文前22个字符
       if (this.m_abbr.trim() === '') {
-        this.m_abbr = this.$removeReturn(this.$getSelectTextById('editor')).substr(0, 22)
+        // this.m_abbr = this.$removeReturn(this.$getSelectTextById('editor')).substr(0, 22)
+        this.$warn('文章摘要不能为空')
+        return false
       }
       if (this.m_abbr.trim().length > 22) {
         this.$warn('文章摘要过长')
