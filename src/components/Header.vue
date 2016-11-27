@@ -81,7 +81,7 @@ $search-height: 36px;
     outline:none;
     width:200px;
     font-size: 12px;
-    padding-left: 5px;
+    padding-left: 8px;
     color: #666;
     background-color: #fff;
     border-top-left-radius:2px;

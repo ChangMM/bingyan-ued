@@ -6,7 +6,7 @@
     <div class="brick-editor-wrap">
       <div class="editor-left">
         <div class="preview-ued-article">
-          <p class="preview-tip tip">预览</p>
+          <!-- <p class="preview-tip tip">预览</p> -->
           <div class="article-img-wrap">
             <input type="file" v-on:change="f_cover" class="file-input">
             <img v-bind:src="m_cover?m_cover:m_cover_default"/>
@@ -32,17 +32,9 @@
         </div>
       </div>
       <div class="editor-main">
-        <div class="btn-toolbar clearfix" data-role="editor-toolbar" data-target="#editor">
-          <div class="btn-group">
-            <a class="btn undo" data-edit="undo" title="取消(Ctrl/Cmd+Z)"></a>
-            <a class="btn redo" data-edit="redo" title="重做(Ctrl/Cmd+Y)"></a>
-            <a class="btn upload" title="插入图片"><input type="file" data-edit="insertImage" /></a>
-          </div>
-          <div class="btn-group float-right">
-            <span class="button save" v-on:click='f_save($event)'>保存</span>
-            <span class="button view" v-on:click='f_preview'>预览</span>
-            <span class="button release" v-on:click='f_save_release'>保存并发布</span>
-          </div>
+        <div class="btn-group">
+          <span class="button save" v-on:click='f_save($event)'>保存</span>
+          <span class="button view" v-on:click='f_preview'>预览</span>
         </div>
         <div class="title-wrap">
           <img src="../../assets/left.png" class="left" />
@@ -50,14 +42,14 @@
           <input type="text" class="title" v-model="m_title" placeholder="请在这里输入标题">
           <span class="word-tip">{{ m_title | len }}/32</span>
         </div>
-        <div id="editor" v-on:focus="f_editor_focus" v-on:blur="f_editor_blur">这里开始正文</div>
+        <textarea id="editor" spellcheck="false" placeholder="这里是正文" autofocus></textarea>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-/* global $:true, FormData:true, location:true */
+/* global $:true, FormData:true, location:true, Simditor:true */
 export default {
   data () {
     return {
@@ -79,13 +71,48 @@ export default {
       m_$editor: null
     }
   },
-  ready () {
-    // 绑定页面退出事件
-    $(window).bind('beforeunload', function () {
-      return '您可能有数据没有保存'
-    })
+  mounted () {
+    // // 绑定页面退出事件
+    // $(window).bind('beforeunload', function () {
+    //   return '您可能有数据没有保存'
+    // })
+    this.f_init_editor()
   },
   methods: {
+    f_init_editor: function () {
+      let editor = new Simditor({
+        textarea: $('#editor'),
+        toolbar: ['title', 'bold', 'underline', 'color', '|', 'ul', 'blockquote', 'code', 'table', '|', 'link', 'image'],
+        toolbarFloat: false,
+        // toolbarFloatOffset: '60px',
+        tabIndent: true,
+        defaultImage: '/static/img/default_cover.png',
+        upload: {
+          url: '/api/upload',
+          fileKey: 'upload_file',
+          connectionCount: 3,
+          leaveConfirm: '正在上传文件，如果离开上传会自动取消'
+        },
+        pasteImage: true,
+        codeLanguages: [
+          { name: 'Bash', value: 'bash' },
+          { name: 'C++', value: 'c++' },
+          { name: 'CSS', value: 'css' },
+          { name: 'Less', value: 'less' },
+          { name: 'Sass', value: 'sass' },
+          { name: 'HTML', value: 'html' },
+          { name: 'JSON', value: 'json' },
+          { name: 'Java', value: 'java' },
+          { name: 'JavaScript', value: 'js' },
+          { name: 'Markdown', value: 'markdown' },
+          { name: 'Objective C', value: 'oc' },
+          { name: 'PHP', value: 'php' },
+          { name: 'Python', value: 'python' },
+          {name: 'SQL', value: 'sql'}
+        ]
+      })
+      console.log(editor)
+    },
     f_get_edit_content: function () {
       let pid = this.$parseUrl(location.href).params['pid']
       if (!pid) {
@@ -152,16 +179,6 @@ export default {
     },
     f_return: function () {
       location.href = '/main#!/articles'
-    },
-    f_editor_focus: function () {
-      if (this.m_$editor.html() === '这里开始正文') {
-        this.m_$editor.html('')
-      }
-    },
-    f_editor_blur: function () {
-      if (this.m_$editor.html() === '') {
-        this.m_$editor.html('这里开始正文')
-      }
     },
     f_save: function (event) {
       this.m_content = this.m_$editor.html()
@@ -354,10 +371,9 @@ export default {
           font-size: 12px;
           position: absolute;
           z-index: 1;
-          top:0;
           left:0;
           right:0;
-          bottom:0;
+          bottom:12px;
           margin: auto;
         }
         input{
@@ -402,7 +418,7 @@ export default {
         font-size: 14px;
         height: 30px;
         line-height: 30px;
-        margin-top: 6px;
+        margin-bottom: 6px;
         width:90px;
         color: #fff;
         text-align: center;
@@ -434,6 +450,9 @@ export default {
       outline: none;
       resize: none;
       border:1px solid #ddd;
+      &:focus{
+        border-color: $bingyan-color;
+      }
     }
     .word-tip{
       position: absolute;
@@ -445,107 +464,82 @@ export default {
   }
   .editor-main{
     padding-left:40px;
+    position: relative;
     div[data-role="editor-toolbar"] {
       -webkit-user-select: none;
       -moz-user-select: none;
       -ms-user-select: none;
       user-select: none;
     }
-    .btn-toolbar{
-      padding:6px;
-      border-bottom:1px solid #ddd;
-      .btn-group{
+    .btn-group{
+      position: absolute;
+      top:6px;
+      right:0;
+      z-index: 2;
+      .button{
         display: inline-block;
-        .button{
-          display: inline-block;
-          width:100px;
-          height:30px;
-          font-size: 12px;
-          line-height: 30px;
-          border: 1px solid #ff6c74;
-          margin-left: 12px;
-          &.firt-child{
-            margin-left: 0;
-          }
-          &.save{
-            color:#ff6c74;
-            &:hover{
-              color:#fff;
-              background-color: darken(#ff6c74,5%);
-            }
-          }
-          &.release,&.view{
+        width:80px;
+        height:30px;
+        font-size: 12px;
+        line-height: 30px;
+        border: 1px solid $bingyan-color;
+        margin-left: 12px;
+        &.firt-child{
+          margin-left: 0;
+        }
+        &.save{
+          color:$bingyan-color;
+          &:hover{
             color:#fff;
-            background-color: #ff6c74;
-            &:hover{
-              background-color: darken(#ff6c74,5%);
-            }
-          }
-          &.disable{
-            color: #fff;
-            background-color: lighten(#ff6c74,10%);
-            border-color: lighten(#ff6c74,10%);
+            background-color: darken($bingyan-color,5%);
           }
         }
-        .btn{
-          display: inline-block;
-          height:30px;
-          line-height: 30px;
-          text-align: center;
-          width:30px;
-          border-radius: 2px;
-          cursor: pointer;
-          background-size: 16px;
-          background-position: center;
-          background-repeat: no-repeat;
+        &.release,&.view{
+          color:#fff;
+          background-color: $bingyan-color;
           &:hover{
-            background-color: #ddd;
+            background-color: darken($bingyan-color,5%);
           }
-          &.undo{
-            background-image:url('../../assets/undo.png');
-          }
-          &.redo{
-            background-image: url('../../assets/redo.png');
-          }
-          &.upload{
-            background-image: url('../../assets/upload.png');
-            position: relative;
-            input{
-              cursor: pointer;
-              position: absolute;
-              opacity: 0;
-              top:0;
-              left:0;
-              width:100%;
-              height:100%;
-            }
-          }
+        }
+        &.disable{
+          color: #fff;
+          background-color: lighten($bingyan-color,10%);
+          border-color: lighten($bingyan-color,10%);
         }
       }
     }
     .title-wrap{
+      left:0;
+      right:0;
       width:90%;
       margin: 30px auto 0;
-      position: relative;
+      transform: translateX(20px);
+      position: absolute;
+      top:42px;
+      z-index:2;
       .left{
         position: absolute;
-        top:-8px;
+        top:-16px;
         left:-16px;
       }
       .right{
         position: absolute;
-        top:-8px;
+        top:-16px;
         right:-16px;
       }
       .title{
         border:none;
         outline:none;
+        box-sizing: border-box;
         width:100%;
         height:50px;
         font-size: 16px;
         color:#666;
         border-bottom: 1px solid #ddd;
         background-color: transparent;
+        &:focus{
+          border-color: $bingyan-color;
+        }
       }
       .word-tip{
         position: absolute;
@@ -555,28 +549,28 @@ export default {
         font-size: 12px;
       }
     }
-    #editor {
-      width:90%;
-      margin: 10px auto 0;
-    	max-height: 600px;
-    	height: 500px;
-    	padding: 4px;
-      color:#333;
-    	box-sizing: border-box;
-    	overflow-y: scroll;
-    	outline: none;
-      img{
-        max-width:100%;
-      }
-    }
-    #editor::-webkit-scrollbar {
-      width: 6px;
-    }
-    #editor::-webkit-scrollbar-thumb {
-      background-color: #ddd;
-    }
-    #editor::-webkit-scrollbar-track {
-      border:1px solid #eee;
-    }
+    // #editor {
+    //   width:90%;
+    //   margin: 10px auto 0;
+    // 	max-height: 600px;
+    // 	height: 500px;
+    // 	padding: 4px;
+    //   color:#333;
+    // 	box-sizing: border-box;
+    // 	overflow-y: scroll;
+    // 	outline: none;
+    //   img{
+    //     max-width:100%;
+    //   }
+    // }
+    // #editor::-webkit-scrollbar {
+    //   width: 6px;
+    // }
+    // #editor::-webkit-scrollbar-thumb {
+    //   background-color: #ddd;
+    // }
+    // #editor::-webkit-scrollbar-track {
+    //   border:1px solid #eee;
+    // }
   }
 </style>
