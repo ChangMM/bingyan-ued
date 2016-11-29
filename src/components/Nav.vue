@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="nav-wrap">
       <div class="nav-display">
-          <img src="../assets/hover_vd.png" alt="导航展示"/>
+          <!-- <img src="../assets/slogan.png" alt="导航展示"/> -->
           <p class="slogan">做高校最好的互联网团队博客</p>
       </div>
       <div class="menu">
@@ -73,7 +73,7 @@ $width: 220px;
   transition:opacity 0.2s ease 0.5s;
 
   background: {
-    image:url("../assets/hover_vd.png");
+    image:url("../assets/slogan.png");
     repeat: no-repeat;
     position: 50% 50px;
   }

@@ -30,7 +30,7 @@ import _ from 'lodash'
 export default {
   data () {
     return {
-      m_default_cover: require('../../../assets/default_cover.png')
+      m_default_cover: '/static/img/default_cover.png'
     }
   },
   computed: {

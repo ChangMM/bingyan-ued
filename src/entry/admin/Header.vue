@@ -7,8 +7,8 @@
         <a href="#"><img src="../../assets/by_ideas_black.png" class="ued-logo" alt="Bingyan Ideas"/> </a>
       </div>
       <div class="mp-wrap">
-        <router-link :to="{path: '/setting'}"><img v-bind:src="avatar" class="avatar" alt="砖栏头像" /></router-link>
-        <router-link :to="{path: '/setting'}"><span class="name">{{ nickname }}</span></router-link> |
+        <img src="../../assets/super.png" class="avatar" alt="砖栏头像" />
+        <span class="name">管理员</span> |
         <a href="/loginout" id="logout">退出</a>
       </div>
     </div>
@@ -19,20 +19,6 @@
 export default {
   data () {
     return {
-      avatar: require('../../assets/logo.png'),
-      nickname: '子矜'
-    }
-  },
-  mounted () {
-    this.f_get_usr_info()
-  },
-  methods: {
-    f_get_usr_info: function () {
-      this.$http.get('/api/user/info').then(function (response) {
-        let body = response.body
-        this.avatar = body.data.avatar
-        this.nickname = body.data.nickname
-      })
     }
   }
 }

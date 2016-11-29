@@ -1,0 +1,25 @@
+@import "./_base.scss";
+#app{
+  box-sizing:border-box;
+  padding-top:60px;
+}
+.main{
+  width: 950px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 160px;
+  padding-top: 20px;
+  position: relative;
+  box-sizing: border-box;
+  .main-left{
+    height:100%;
+    position: absolute;
+    top:20px;
+    left:0;
+    width:160px;
+  }
+  .main-right{
+    box-sizing: border-box;
+    padding-left: 60px;
+  }
+}

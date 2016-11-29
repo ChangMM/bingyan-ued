@@ -29,18 +29,11 @@ module.exports = {
            '^/api': '/api'
          }
       },
-      '/static/img': {
+      '/resource': {
          target: 'http://localhost:5000',
          changeOrigin: true,
          pathRewrite: {
-           '^/static/img': '/static/img'
-         }
-      },
-      '/user': {
-         target: 'http://localhost:5000',
-         changeOrigin: true,
-         pathRewrite: {
-           '^/user': '/user'
+           '^/resource': '/resource'
          }
       }
     },

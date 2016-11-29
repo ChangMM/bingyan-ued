@@ -47,7 +47,6 @@ $header-height: 60px;
     vertical-align: middle;
     &.bingyan-logo{
       height:40px;
-      margin-right: 20px;
     }
   }
 }
