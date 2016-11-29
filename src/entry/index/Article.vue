@@ -116,10 +116,8 @@ export default {
         this.m_comments = response.body.data
         // 处理评论区内容的表情  过滤函数不能用只能这样处理了。。
         this.m_comments.forEach(function (item) {
-          item.comment_content = item.comment_content.replace(/:([a-z_]+):/g, function (str, $1) {
-            return '<img src="http://newbbs.bingyan.net/assets/emojis/' + $1 + '.png" class="emoji" title="' + str + '">'
-          })
-        })
+          item.comment_content = this.$formatEmoji(item.comment_content)
+        }.bind(this))
       })
     },
     f_like: function () {

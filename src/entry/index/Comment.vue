@@ -31,6 +31,11 @@ export default {
       m_error_msg: '这是错误提示信息'
     }
   },
+  computed: {
+    m_cal_content: function () {
+      return this.$encodeHtml(this.m_content)
+    }
+  },
   props: ['articleId', 'refresh'],
   mounted () {
     this.f_get_pin()
@@ -86,7 +91,7 @@ export default {
         name: this.m_name,
         pin: this.m_pin,
         pin_src: this.pin_src,
-        content: this.m_content,
+        content: this.m_cal_content,
         article_id: this.articleId
       }).then(function (response) {
         if (response.body.status === 1) {

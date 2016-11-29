@@ -87,4 +87,51 @@ export default function (Vue) {
   Vue.prototype.$fixNoBody = function () {
     document.getElementsByTagName('body')[0].style.overflow = ''
   }
+
+  Vue.prototype.$encodeHtml = function (html) {
+    let REGX_HTML_ENCODE = /"|&|'|<|>|[\x00-\x20]|[\x7F-\xFF]|[\u0100-\u2700]/g
+    return (typeof html !== 'string') ? html
+    : html.replace(REGX_HTML_ENCODE, function ($0) {
+      let c = $0.charCodeAt(0)
+      let r = ['&#']
+      c = (c === 0x20) ? 0xA0 : c
+      r.push(c)
+      r.push(';')
+      return r.join('')
+    })
+  }
+
+  Vue.prototype.$decodeHtml = function (html) {
+    let REGX_HTML_DECODE = /&\w{1,};|&#\d{1,};/g
+    let HTML_DECODE = {
+      '&lt;': '<',
+      '&gt;': '>',
+      '&amp;': '&',
+      '&nbsp;': ' ',
+      '&quot;': '"',
+      '&copy;': '©'
+      // add more
+    }
+    return (typeof html !== 'string') ? html
+    : html.replace(REGX_HTML_DECODE, function ($0) {
+      let c = HTML_DECODE[$0]
+      if (c === undefined) {
+        let m = $0.match(/\d{1,}/)
+        if (m) {
+          let cc = m[0]
+          cc = (cc === 0xA0) ? 0x20 : cc
+          c = String.fromCharCode(cc)
+        } else {
+          c = $0
+        }
+      }
+      return c
+    })
+  }
+
+  Vue.prototype.$formatEmoji = function (content) {
+    return content.replace(/:([a-z_]+):/g, function (str, $1) {
+      return '<img src="http://newbbs.bingyan.net/assets/emojis/' + $1 + '.png" class="emoji" title="' + str + '">'
+    })
+  }
 }
