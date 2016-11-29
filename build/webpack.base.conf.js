@@ -16,6 +16,7 @@ module.exports = {
     admin: './src/entry/admin/admin.js',
     login: './src/entry/login/login.js',
     user: './src/entry/user/user.js',
+    mobile: './src/entry/mobile/mobile.js',
     new: './src/entry/new/new.js'
   },
   output: {

@@ -55,5 +55,11 @@ module.exports = merge(baseWebpackConfig, {
       inject: true,
       chunks:['admin']
     }),
+    new HtmlWebpackPlugin({
+      filename: 'mobile.html',
+      template: 'mobile.html',
+      inject: true,
+      chunks:['mobile']
+    })
   ]
 })
