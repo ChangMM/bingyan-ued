@@ -5,6 +5,9 @@ import VueResource from 'vue-resource'
 import VueRouter from 'vue-router'
 import Header from './Header.vue'
 import Nav from './Nav.vue'
+import Released from './Released.vue'
+import Checking from './Checking.vue'
+import Rejected from './Rejected.vue'
 
 let WarnPlugin = require('../../components/Warn/Warn.js')
 let ConfirmPlugin = require('../../components/Confirm/Confirm.js')
@@ -19,7 +22,11 @@ Vue.use(VueRouter)
 Vue.use(WarnPlugin)
 Vue.use(ConfirmPlugin)
 Vue.http.options.emulateJSON = true
-let routes = []
+let routes = [
+  {path: '/released', component: Released},
+  {path: '/checking', component: Checking},
+  {path: '/rejected', component: Rejected},
+  {path: '/setting', component: Released}]
 let router = new VueRouter({
   routes: routes
 })

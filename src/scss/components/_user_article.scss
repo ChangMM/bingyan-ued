@@ -71,6 +71,10 @@
     min-width: 100px;
     .data-info{
       font-size: 12px;
+      .author-name{
+        color:$bingyan-color;
+        font-size: 13px;
+      }
     }
     .operation-wrap{
       position: absolute;
