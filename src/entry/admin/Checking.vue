@@ -21,6 +21,7 @@
               <span class="author-name">{{lib.author_name}}</span>
               {{lib.article_date | timeFormat}}</span>
             <p class="operation-wrap">
+              <span class="action" v-on:click="f_preview_article(lib.article_id)">预览</span>
               <span class="action" v-on:click="f_pass_article(lib.article_id)">通过</span>
               <span class="action" v-on:click="f_reject_article(lib.article_id)">拒绝</span>
             </p>
@@ -35,16 +36,20 @@
         </p>
       </template>
     </div>
+    <Preview v-show='m_preview' :article='m_preview_article' v-on:close='f_close_preview'> </Preview>
   </div>
 </template>
 
 <script>
 import _ from 'lodash'
+import Preview from '../../components/Preview.vue'
 export default {
   data () {
     return {
       m_default_cover: '/static/img/default_cover.png',
       m_search_title: '',
+      m_preview: false,
+      m_preview_article: {},
       m_libs: []
     }
   },
@@ -64,6 +69,18 @@ export default {
     this.f_get_checking_articles()
   },
   methods: {
+    f_close_preview: function () {
+      this.m_preview = false
+    },
+    f_preview_article: function (articleId) {
+      this.$http.get('/api/admin/article/' + articleId).then(function (response) {
+        let body = response.body
+        if (body.status === 1) {
+          this.m_preview = true
+          this.m_preview_article = body.data
+        }
+      })
+    },
     f_get_checking_articles: function () {
       this.$http.get('/api/admin/articles/checking').then(function (response) {
         let body = response.body
@@ -104,6 +121,9 @@ export default {
         })
       }.bind(this))
     }
+  },
+  components: {
+    Preview
   }
 }
 </script>

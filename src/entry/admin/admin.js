@@ -8,6 +8,8 @@ import Nav from './Nav.vue'
 import Released from './Released.vue'
 import Checking from './Checking.vue'
 import Rejected from './Rejected.vue'
+import Comment from './Comment.vue'
+import People from './People.vue'
 
 let WarnPlugin = require('../../components/Warn/Warn.js')
 let ConfirmPlugin = require('../../components/Confirm/Confirm.js')
@@ -26,7 +28,8 @@ let routes = [
   {path: '/released', component: Released},
   {path: '/checking', component: Checking},
   {path: '/rejected', component: Rejected},
-  {path: '/setting', component: Released}]
+  {path: '/people', component: People},
+  {path: '/comment', component: Comment}]
 let router = new VueRouter({
   routes: routes
 })

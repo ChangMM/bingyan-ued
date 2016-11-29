@@ -8,11 +8,11 @@
     </dl>
     <dl class="menu">
       <dt class="menu-title">评论管理</dt>
-      <dd class="menu-item"><router-link :to="{path: '/setting'}">所有评论</router-link></dd>
+      <dd class="menu-item"><router-link :to="{path: '/comment'}">所有评论</router-link></dd>
     </dl>
     <dl class="menu">
-      <dt class="menu-title">人员管理</dt>
-      <dd class="menu-item"><router-link :to="{path: '/setting'}">所有人员</router-link></dd>
+      <dt class="menu-title">成员管理</dt>
+      <dd class="menu-item"><router-link :to="{path: '/people'}">所有人员</router-link></dd>
     </dl>
   </div>
 </template>
