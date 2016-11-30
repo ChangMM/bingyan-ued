@@ -1,6 +1,17 @@
 @import './_base.scss';
 @import "editor/editor_article.scss";
+html,body{
+  height: 100%;
+}
 #app{
-  padding-top: 50px;
+  height:100%;
+  box-sizing:border-box;
+  padding-top:50px;
   background-color: #fff;
+}
+.main{
+  min-height:100%;
+  box-sizing: border-box;
+  padding-bottom: 60px;
+  margin-bottom: -60px;
 }

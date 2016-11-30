@@ -24,7 +24,8 @@ export default {
 <style lang="scss" scoped>
 .footer{
   color: #999;
-  height:60px;
+  padding-top: 6px;
+  padding-bottom: 6px;
   .links{
     display: inline-block;
     width:100%;

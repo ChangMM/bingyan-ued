@@ -33,7 +33,7 @@
 export default {
   data () {
     return {
-      NUM: 5, // 移动端文章一次加载的数量
+      NUM: 1, // 移动端文章一次加载的数量
       m_loading: true,
       m_more: true,
       m_over: false,
@@ -111,8 +111,6 @@ export default {
 @import '../../scss/_varilables.scss';
 @import '../../scss/components/_button.scss';
 .articles-wrap{
-  background-color: #f8f9fb;
-  padding-bottom: 1px;
   .article{
     position: relative;
     margin-bottom: 20px;
@@ -139,7 +137,7 @@ export default {
       position: relative;
       z-index: 1;
       margin-top: -40px;
-      background-color: #fff;
+      background-color: #f8f9fb;
       padding: 10px;
       .article-title{
         font-size: 18px;
@@ -163,14 +161,12 @@ export default {
   }
 }
 .loading-wrap{
-  background-color: #f8f9fb;
   text-align: center;
   .loading{
     height:60px;
   }
 }
 .more-wrap{
-  background-color: #f8f9fb;
   text-align: center;
   padding-bottom: 20px;
   padding-top: 10px;
