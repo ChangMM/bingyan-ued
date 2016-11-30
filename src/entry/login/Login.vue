@@ -8,14 +8,14 @@
     <div class="login-form">
       <div :class="['input-row-wrap', {'active': m_focus_1}]">
         <label for="username"><i class="fa fa-envelope fa-lg"></i></label>
-        <input type="text" autocomplete='off' v-on:focus="f_focus(1)" v-model='m_username' v-on:blur="f_blur(1)" placeholder="冰岩企业邮箱"/>
+        <input type="text" autocomplete='off' spellcheck='false' v-on:focus="f_focus(1)" v-model='m_username' v-on:blur="f_blur(1)" placeholder="冰岩企业邮箱"/>
       </div>
       <div :class="['input-row-wrap', {'active': m_focus_2}]">
         <label for="password"><i class="fa fa-key fa-lg"></i></label>
         <input type="password" autocomplete='off' v-on:focus="f_focus(2)" v-model='m_password' v-on:blur="f_blur(2)" placeholder="密码自己猜"/>
       </div>
       <div class="input-row-wrap">
-        <input class="submit" type="button" v-on:click="f_login" value="登录"/>
+        <input class="submit" type="button" v-on:click="f_login" v-model="m_input_word"/>
       </div>
     </div>
   </div>
@@ -28,7 +28,8 @@ export default {
       m_focus_1: false,
       m_focus_2: false,
       m_username: '',
-      m_password: ''
+      m_password: '',
+      m_input_word: '登录'
     }
   },
   computed: {},
@@ -63,12 +64,16 @@ export default {
       if (!this.f_check_login()) {
         return
       }
+      this.m_input_word = '正在登录'
       this.$http.post('/api/login', {
         username: this.m_username,
         password: this.m_password
       }).then(function (response) {
-        // 可以由后台跳转也可以放在前端
-        console.log(response.body.data)
+        let body = response.body
+        if (body.status === 3) {
+          this.$warn(body.msg)
+          this.m_input_word = '重新登录'
+        }
       })
     }
   }

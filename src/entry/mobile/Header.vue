@@ -154,6 +154,7 @@ $header-height: 50px;
   .nav{
     display: block;
     text-align: center;
+    cursor: pointer;
     color: #fff;
     height:40px;
     line-height: 40px;
