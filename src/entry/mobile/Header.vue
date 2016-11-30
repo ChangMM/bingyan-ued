@@ -10,7 +10,7 @@
       <span></span>
       <span></span>
     </div>
-    <div class="nav-wrap" id="nav-wrap">
+    <div :class="['nav-wrap', {'open': m_open_nav}]" id="nav-wrap">
       <div class="nav-display">
           <p class="slogan">做高校最好的互联网团队博客</p>
       </div>
@@ -33,9 +33,13 @@
         <span class="nav" v-on:click ='f_go("rd")'>
           <span class="zh_cn">研发</span> <span class="us_en">RD</span>
         </span>
-        <span class="nav" v-on:click ='f_go("about")'>
+        <a class="nav" href="http://www.bingyan.net" target='_blank'>
           <span class="zh_cn">关于我们</span><span class="us_en">ABOUT US</span>
-        </span>
+        </a>
+        <p class='contact'>
+          <a href="https://github.com/ChangMM" target="_blank" class="icon-github iconfont"></a>
+          <a href="http://weibo.com/bingyanhust" target="_blank" class="icon-weibo1 iconfont"></a>
+        </p>
       </div>
     </div>
   </div>
@@ -51,22 +55,14 @@ export default {
   methods: {
     f_open_nav: function (e) {
       let currentTarget = e.currentTarget
-      let list = document.querySelector('#nav-wrap').classList
       if (currentTarget.classList.contains('toggle-animate')) {
         this.m_open_nav = false
-        if (list.contains('open')) {
-          list.remove('open')
-        }
       } else {
         this.m_open_nav = true
-        list.add('open')
       }
     },
     f_close_nav: function () {
-      let navList = document.querySelector('#nav-wrap').classList
-      let toggleList = document.querySelector('#nav-toggle').classList
-      toggleList.remove('toggle-animate')
-      navList.remove('open')
+      this.m_open_nav = false
     },
     f_go: function (path) {
       this.$router.push('/category/' + path)
@@ -186,6 +182,14 @@ $header-height: 50px;
       width: 240px;
       text-align: center;
       color:#999;
+    }
+  }
+  .contact{
+    text-align: center;
+    color: #fff;
+    height:40px;
+    .iconfont{
+      font-size: 22px;
     }
   }
 }

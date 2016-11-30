@@ -28,6 +28,10 @@ let routes = [
     component: NotFound
   },
   {
+    path: '/404',
+    component: NotFound
+  },
+  {
     path: '/category/:type',
     component: Category,
     beforeEnter: function (to, from, next) {

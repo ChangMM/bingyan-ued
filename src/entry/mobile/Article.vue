@@ -18,7 +18,7 @@
       <div class="by-article-footer">
         <span class="article-copyright">© 版权归作者所有，转载请联系冰岩作坊</span>
         <span class="like-wrap select-no" data-tip="点赞" :class="{'active': m_liked}" v-on:click="f_like">
-          <b class="fa fa-thumbs-o-up"></b>|
+          <b class="iconfont icon-like1"></b>|
           <b class="like-num">{{ m_like_num }}</b>
         </span>
         <div class="page-turn">

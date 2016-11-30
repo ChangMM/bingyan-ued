@@ -59,6 +59,8 @@ export default {
 @import '../../scss/_varilables.scss';
 @import '../../scss/components/_button.scss';
 .articles-wrap{
+  background-color: #f8f9fb;
+  padding-bottom: 1px;
   .article{
     position: relative;
     margin-bottom: 20px;
@@ -109,15 +111,16 @@ export default {
   }
 }
 .loading-wrap{
+  background-color: #f8f9fb;
   text-align: center;
   .loading{
     height:60px;
   }
 }
 .more-wrap{
+  background-color: #f8f9fb;
   text-align: center;
-  margin-bottom: 20px;
-  margin-top: 10px;
+  padding-bottom: 20px;
   .more-button{
     width:80%;
     border-radius: 4px;

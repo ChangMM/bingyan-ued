@@ -22,15 +22,15 @@
       <div class="by-article-footer">
         <span class="article-copyright">© 版权归作者所有，转载请联系冰岩作坊</span>
         <span class="like-wrap select-no" data-tip="点赞" :class="{'active': m_liked}" v-on:click="f_like">
-          <b class="fa fa-thumbs-o-up"></b>|
+          <b class="iconfont icon-like1"></b>|
           <b class="like-num">{{ m_like_num }}</b>
         </span>
         <div class="share-wrap">
           <a href="javascript:void(0);" class="share-to-weibo">
-            <b class="fa fa-weibo"></b>分享到微博
+            <b class="iconfont icon-weibo1"></b>分享到微博
           </a>
           <a href="javascript:void(0);" :class="['share-to-weixin', {'active':m_share_weixin_show}]" v-on:mouseout='f_not_share_weixin' v-on:mouseover='f_share_weixin'>
-            <b class="fa fa-weixin"></b>分享到微信
+            <b class="iconfont icon-wechat"></b>分享到微信
             <div class="qrcode-wrap">
               <img v-bind:src="m_qrcode_src" class="qrcode"/>
             </div>
@@ -219,6 +219,11 @@ export default {
   .share-wrap{
     display: inline-block;
     color: #666;
+    .iconfont{
+      color: #999;
+      font-size: 18px;
+      font-weight: 100;
+    }
     .share-to-weixin{
       position: relative;
       .qrcode-wrap{
@@ -278,6 +283,9 @@ export default {
     }
     a:hover{
       color: #000;
+      .iconfont{
+        color: #000;
+      }
     }
   }
   .page-turn{
