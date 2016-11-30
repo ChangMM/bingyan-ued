@@ -66,6 +66,12 @@ export default {
     '$route': ['f_get_article', 'f_get_comments']
   },
   methods: {
+    f_set_share: function (cover, word) {
+      let title = document.querySelector('title')
+      let img = document.querySelector('#share-img')
+      img.setAttribute('src', 'http://ued.bingyan.net' + cover)
+      title.innerHTML = word
+    },
     f_get_article: function () {
       let id = this.$route.params.id
       this.$http.get('/api/article/' + id).then(function (response) {
@@ -93,6 +99,8 @@ export default {
         this.m_pre_article_id = body.data.article_pre
         this.m_next_article_id = body.data.article_next
         this.m_liked = body.data.liked
+
+        this.f_set_share(this.m_article_cover, this.m_article_title)
       })
     },
     f_get_comments: function () {

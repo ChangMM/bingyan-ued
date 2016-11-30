@@ -26,7 +26,7 @@
           <b class="like-num">{{ m_like_num }}</b>
         </span>
         <div class="share-wrap">
-          <a href="javascript:void(0);" class="share-to-weibo">
+          <a href="#" target="_blank" id="share-to-weibo" class="share-to-weibo">
             <b class="iconfont icon-weibo1"></b>分享到微博
           </a>
           <a href="javascript:void(0);" :class="['share-to-weixin', {'active':m_share_weixin_show}]" v-on:mouseout='f_not_share_weixin' v-on:mouseover='f_share_weixin'>
@@ -81,6 +81,15 @@ export default {
     '$route': ['f_get_article', 'f_get_comments']
   },
   methods: {
+    f_init_share: function (cover, word) {
+      let title = document.querySelector('title')
+      let img = document.querySelector('#share-img')
+      let weibo = document.querySelector('#share-to-weibo')
+      let imageURL = 'http://ued.bingyan.net' + cover
+      title.innerHTML = word
+      img.setAttribute('src', imageURL)
+      weibo.setAttribute('href', 'http://service.weibo.com/share/share.php?url=' + encodeURIComponent(window.location.href) + '&title=' + encodeURIComponent('冰岩UED，可能是高校中最好的互联网团队博客 |' + word) + '&pic=' + encodeURIComponent(imageURL) + '&appkey=bingyan')
+    },
     f_get_article: function () {
       let id = this.$route.params.id
       this.$http.get('/api/article/' + id).then(function (response) {
@@ -108,6 +117,8 @@ export default {
         this.m_pre_article_id = body.data.article_pre
         this.m_next_article_id = body.data.article_next
         this.m_liked = body.data.liked
+
+        this.f_init_share(this.m_article_cover, this.m_article_title)
       })
     },
     f_get_comments: function () {
