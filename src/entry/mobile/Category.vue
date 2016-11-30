@@ -33,7 +33,7 @@
 export default {
   data () {
     return {
-      NUM: 1,
+      NUM: 5, // 移动端文章一次加载的数量
       m_loading: true,
       m_more: true,
       m_over: false,
@@ -45,9 +45,15 @@ export default {
     this.f_get_articles()
   },
   watch: {
-    '$route': 'f_get_articles'
+    '$route': ['f_ajust_args', 'f_get_articles']
   },
   methods: {
+    f_ajust_args: function () {
+      this.m_loading = true
+      this.m_over = false
+      this.m_more = true
+      this.m_more_wrod = '加载更多'
+    },
     f_get_more: function () {
       if (this.m_over) {
         return
