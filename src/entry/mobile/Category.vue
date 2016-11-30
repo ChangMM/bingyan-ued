@@ -44,7 +44,19 @@ export default {
     '$route': 'f_get_articles'
   },
   methods: {
+    f_judge_router: function () {
+      let routes = ['all', 'pm', 'vd', 'id', 'fe', 'rd']
+      let type = this.$route.params.type
+      if (routes.indexOf(type) !== -1) {
+        return true
+      } else {
+        return false
+      }
+    },
     f_get_articles: function () {
+      if (!this.f_judge_router()) {
+        this.$router.replace('/404')  // 这个要用replace 而不是push
+      }
       let type = this.$route.params.type
       this.$http.get('/api/category/' + type).then(function (response) {
         let body = response.body
@@ -121,6 +133,7 @@ export default {
   background-color: #f8f9fb;
   text-align: center;
   padding-bottom: 20px;
+  padding-top: 10px;
   .more-button{
     width:80%;
     border-radius: 4px;

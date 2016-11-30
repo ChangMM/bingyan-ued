@@ -25,27 +25,12 @@ Vue.http.options.emulateJSON = true
 let routes = [
   { path: '/', redirect: '/category/all' },
   { path: '/category', redirect: '/category/all' },
-  {
-    path: '/category/404',
-    component: NotFound
-  },
-  {
-    path: '/category/:type',
-    component: Category,
-    beforeEnter: function (to, from, next) {
-      // 为什么这个会有问题
-      // console.log(to.params.type, from.params.type)
-      let routes = ['all', 'pm', 'vd', 'id', 'fe', 'rd', '404']
-      if (routes.indexOf(to.params.type) !== -1) {
-        next(true)
-      } else {
-        next('/category/404')
-      }
-    }
-  },
+  { path: '/404', component: NotFound },
+  { path: '/category/:type', component: Category },
   { path: '/article/:id', component: Article },
   { path: '/search', redirect: '/search/ ' },
-  { path: '/search/:keyword', name: 'search', component: Search }
+  { path: '/search/:keyword', name: 'search', component: Search },
+  { path: '/:type', redirect: '/404' }
 ]
 let router = new VueRouter({
   routes: routes
