@@ -24,8 +24,8 @@
     <div class="loading-wrap" v-show="m_loading">
       <img src="../../assets/loading.gif" class="loading" alt="加载中">
     </div>
-    <div class="more-wrap">
-      <span class="button more-button">加载更多</span>
+    <div class="more-wrap" v-show="m_more">
+      <span class="button more-button" v-on:click="f_get_more">{{ m_more_wrod }}</span>
     </div>
   </div>
 </template>
@@ -33,7 +33,11 @@
 export default {
   data () {
     return {
+      NUM: 1,
       m_loading: true,
+      m_more: true,
+      m_over: false,
+      m_more_wrod: '加载更多',
       m_articles: []
     }
   },
@@ -44,6 +48,32 @@ export default {
     '$route': 'f_get_articles'
   },
   methods: {
+    f_get_more: function () {
+      if (this.m_over) {
+        return
+      }
+      let type = this.$route.params.type
+      this.m_more_wrod = '正在加载文章...'
+      this.$http.get('/api/category/' + type, {
+        params: {
+          offset: this.m_articles.length,
+          num: this.NUM
+        }
+      }).then(function (response) {
+        let body = response.body
+        if (body.status === 1) {
+          if (body.data.length === 0) {
+            this.m_over = true
+            this.m_more_wrod = '没有更多文章了'
+          } else {
+            this.m_articles = this.m_articles.concat(body.data)
+            this.m_more_wrod = '更多文章'
+          }
+        } else {
+          this.$warn(body.msg)
+        }
+      })
+    },
     f_judge_router: function () {
       let routes = ['all', 'pm', 'vd', 'id', 'fe', 'rd']
       let type = this.$route.params.type
@@ -58,7 +88,11 @@ export default {
         this.$router.replace('/404')  // 这个要用replace 而不是push
       }
       let type = this.$route.params.type
-      this.$http.get('/api/category/' + type).then(function (response) {
+      this.$http.get('/api/category/' + type, {
+        params: {
+          num: this.NUM
+        }
+      }).then(function (response) {
         let body = response.body
         this.m_articles = body.data
         this.m_loading = false
