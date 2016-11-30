@@ -3,7 +3,7 @@
     <div class="articles-wrap">
       <div class="article mobile-article" v-for='article in m_articles'>
         <router-link :to="{ path: '/article/'+ article.article_id }">
-          <img :src="article.cover" class="article-img" alt="文章名"/>
+          <img :src="article.cover||'/static/img/default_cover.png'" class="article-img" alt="文章名"/>
         </router-link>
         <router-link :to="{ path: '/category/'+ article.category.toLowerCase() }" :class="'article-type ' + article.category.toLowerCase()">{{article.category_full_name}}</router-link>
         <div class="article-info">
@@ -15,7 +15,7 @@
               <span>{{article.like_num}}喜欢</span> · <span>{{article.comment_num}}评论</span>
             </p>
             <p class="left">
-              <span class="name">{{article.author_name}}</span> · <span class="time">{{article.check_date || timeFormat}}</span>
+              <span class="name">{{article.author_name}}</span> · <span class="time">{{article.check_date | timeFormat}}</span>
             </p>
           </div>
         </div>
