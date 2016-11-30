@@ -73,7 +73,7 @@ export default {
       })
     },
     f_edit_article: function (articleId) {
-      location.href = '/new.html?id=' + articleId
+      location.href = '/new?id=' + articleId
     },
     f_cancel_article: function (articleId) {
       this.$confirm().then(function () {
@@ -136,8 +136,5 @@ export default {
       background-color: darken($bingyan-color,5%);
     }
   }
-}
-.articles-wrap{
-  margin-top: 30px;
 }
 </style>

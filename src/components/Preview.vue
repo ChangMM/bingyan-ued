@@ -29,19 +29,7 @@
 export default {
   data () {
     return {
-      m_article_id: null,
-      m_article_title: '预览文章标题',
-      m_article_date: '2014/12/12',
-      m_check_date: '2014/12/12',
-      m_author_name: '子矜',
-      m_author_picture: null,
-      m_share_num: 0,
-      m_comment_num: 0,
-      m_like_num: 0,
-      m_article_cover: '',
-      m_article_content: '测试内容',
-      m_category_full_name: '前端 FE',
-      m_category: 'fe'
+
     }
   },
   props: ['article'],

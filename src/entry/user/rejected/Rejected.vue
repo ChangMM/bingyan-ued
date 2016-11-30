@@ -20,7 +20,7 @@
           <div class="float-right info-wrap">
             <span class="data-info">{{lib.article_date | timeFormat}}</span>
             <p class="operation-wrap">
-              <span class="action">编辑</span>
+              <span class="action" v-on:click='f_edit_article(lib.article_id)'>编辑</span>
               <span class="action" v-on:click="f_cancel_article(lib.article_id)">删除</span>
             </p>
           </div>
@@ -63,6 +63,9 @@ export default {
     this.f_get_rejected_articles()
   },
   methods: {
+    f_edit_article: function (articleId) {
+      window.location.href = '/new?id=' + articleId
+    },
     f_get_rejected_articles: function () {
       this.$http.get('/api/user/articles/rejected').then(function (response) {
         let body = response.body
@@ -133,8 +136,5 @@ export default {
       background-color: darken($bingyan-color,5%);
     }
   }
-}
-.articles-wrap{
-  margin-top: 30px;
 }
 </style>

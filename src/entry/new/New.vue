@@ -34,7 +34,7 @@
       <div class="editor-main">
         <div class="btn-group">
           <span class="button save" v-on:click='f_save($event)'>保存</span>
-          <span class="button view" v-on:click='f_preview'>预览</span>
+          <span class="button view" v-on:click='f_preview_article'>预览</span>
         </div>
         <div class="title-wrap">
           <img src="../../assets/left.png" class="left" />
@@ -45,22 +45,28 @@
         <textarea id="editor" spellcheck="false" placeholder="这里是正文" autofocus></textarea>
       </div>
     </div>
+    <Preview v-show='m_preview' :article='m_preview_article' v-on:close='f_close_preview'> </Preview>
   </div>
 </template>
 
 <script>
 /* global $:true, FormData:true, location:true, Simditor:true */
+import Preview from '../../components/Preview.vue'
 export default {
   data () {
     return {
+      m_preview: false,
+      m_preview_article: {},
       m_aid: '',
       m_cover: '',
       m_cover_default: require('../../assets/editBack.png'),
       m_category: '',
       m_category_full_name: '',
+      m_author_picture: '',
+      m_author_name: '',
+      m_check_date: '',
       m_title: '',
       m_abbr: '',
-      m_preview: false,
       m_time: new Date(),
       m_content: '',
       m_editor: null
@@ -119,6 +125,9 @@ export default {
             this.m_content = data.content
             this.m_cover = data.cover
             this.m_aid = data.article_id
+            this.m_author_picture = data.author_picture
+            this.m_author_name = data.author_name
+            this.m_check_date = data.check_date
             this.m_category = data.category.toLowerCase()
             this.m_category_full_name = data.category_full_name
             // 填充文章内容
@@ -169,10 +178,9 @@ export default {
       this.m_category_full_name = target.innerHTML
     },
     f_return: function () {
-      location.href = '/user.html'
+      location.href = '/user'
     },
     f_save: function (event) {
-      this.m_content = this.m_editor.getValue()
       if (!this.f_check_article()) {
         return
       }
@@ -204,7 +212,6 @@ export default {
       }
     },
     f_save_release: function (event) {
-      this.m_content = this.m_editor.getValue()
       if (!this.f_check_article()) {
         return
       }
@@ -255,12 +262,26 @@ export default {
         }
       })
     },
-    f_preview: function () {
-      this.m_content = this.m_editor.getValue()
+    f_close_preview: function () {
+      this.m_preview = false
+    },
+    f_preview_article: function () {
+      if (!this.f_check_article()) {
+        return
+      }
       this.m_preview = true
-      this.$fixBody()
+      this.m_preview_article = {
+        title: this.m_title,
+        author_picture: this.m_author_picture,
+        author_name: this.m_author_name,
+        check_date: this.m_check_date,
+        category: this.m_category,
+        category_full_name: this.m_category_full_name,
+        content: this.m_content
+      }
     },
     f_check_article: function () {
+      this.m_content = this.m_editor.getValue()
       if (this.m_title.trim() === '') {
         this.$warn('文章标题为空')
         return false
@@ -283,6 +304,10 @@ export default {
         this.$warn('文章封面为空')
         return false
       }
+      if (this.m_category === '') {
+        this.$warn('文章类型为空')
+        return false
+      }
       if (this.m_content === '') {
         this.$warn('文章内容为空')
         return false
@@ -290,7 +315,9 @@ export default {
       return true
     }
   },
-  components: {}
+  components: {
+    Preview
+  }
 }
 </script>
 <style lang="scss" scoped>

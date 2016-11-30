@@ -29,6 +29,20 @@ module.exports = {
            '^/api': '/api'
          }
       },
+      '/login': {
+         target: 'http://localhost:5000',
+         changeOrigin: true,
+         pathRewrite: {
+           '^/login': '/gloin'
+         }
+      },
+      '/loginout': {
+         target: 'http://localhost:5000',
+         changeOrigin: true,
+         pathRewrite: {
+           '^/loginout': '/loginout'
+         }
+      },
       '/resource': {
          target: 'http://localhost:5000',
          changeOrigin: true,

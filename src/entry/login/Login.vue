@@ -65,14 +65,20 @@ export default {
         return
       }
       this.m_input_word = '正在登录'
-      this.$http.post('/api/login', {
+      this.$http.post('/login', {
         username: this.m_username,
         password: this.m_password
       }).then(function (response) {
         let body = response.body
-        if (body.status === 3) {
+        if (body.status === 3 || body.status === 2) {
           this.$warn(body.msg)
           this.m_input_word = '重新登录'
+        } else if (body.status === 1) {
+          if (body.data === 1) {
+            window.location.href = '/admin'
+          } else {
+            window.location.href = '/user'
+          }
         }
       })
     }

@@ -25,6 +25,7 @@ Vue.use(WarnPlugin)
 Vue.use(ConfirmPlugin)
 Vue.http.options.emulateJSON = true
 let routes = [
+  {path: '/', redirect: '/released'},
   {path: '/released', component: Released},
   {path: '/checking', component: Checking},
   {path: '/rejected', component: Rejected},
