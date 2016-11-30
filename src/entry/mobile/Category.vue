@@ -33,7 +33,7 @@
 export default {
   data () {
     return {
-      NUM: 1, // 移动端文章一次加载的数量
+      NUM: 5, // 移动端文章一次加载的数量
       m_loading: true,
       m_more: true,
       m_over: false,

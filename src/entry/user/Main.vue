@@ -2,8 +2,8 @@
   <div>
     <div class="body-header">
       <div class="header-item">
-        <p class="tip">文章阅读数</p>
-        <p class="num">{{ mp_data.read_num}}</p>
+        <p class="tip">文章评论数</p>
+        <p class="num">{{ mp_data.comment_num}}</p>
       </div>
       <div class="header-item">
         <p class="tip">文章点赞数</p>
@@ -40,9 +40,9 @@ export default {
     return {
       m_show_setting_panel: false,
       mp_data: {
-        read_num: 123,
-        like_num: 12,
-        share_num: 43
+        comment_num: 0,
+        like_num: 0,
+        share_num: 0
       },
       announcements: [
         {
@@ -63,8 +63,21 @@ export default {
       ]
     }
   },
-  mounted () {},
-  methods: {},
+  mounted () {
+    this.f_get_stats()
+  },
+  methods: {
+    f_get_stats: function () {
+      this.$http.get('/api/user/stats').then(function (response) {
+        let body = response.body
+        if (body.status === 1) {
+          this.mp_data.comment_num = body.data.all_comment_num
+          this.mp_data.like_num = body.data.all_like_num
+          this.mp_data.share_num = body.data.all_share_num
+        }
+      })
+    }
+  },
   components: {}
 }
 </script>

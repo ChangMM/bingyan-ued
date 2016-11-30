@@ -35,10 +35,17 @@ export default {
   },
   computed: {
     orderedPublished: function () {
-      return _.orderBy(this.published, ['updateTime'], ['desc'])
+      let self = this
+      if (this.search.trim() === '') {
+        return _.orderBy(this.published, ['updateTime'], ['desc'])
+      } else {
+        return _.orderBy(this.published, ['updateTime'], ['desc']).filter(function (lib) {
+          return (lib.title.indexOf(self.search) !== -1) || (lib.category_full_name.indexOf(self.search) !== -1)
+        })
+      }
     }
   },
-  props: ['published', 'refresh'],
+  props: ['published', 'refresh', 'search'],
   methods: {
     f_cancel_article: function (articleId) {
       this.$confirm().then(function () {

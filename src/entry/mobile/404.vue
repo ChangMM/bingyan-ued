@@ -20,8 +20,8 @@ export default {
 
 <style lang="scss">
 .NotFound{
-  margin-top: 40px;
-  margin-bottom: 40px;
+  padding-top: 40px;
+  padding-bottom: 40px;
   text-align: center;
   img{
     width:150px;
@@ -44,7 +44,6 @@ export default {
       line-height: 1;
       position: absolute;
       right:10px;
-      color: #333;
       bottom:0;
       font-size: 12px;
       &:before{

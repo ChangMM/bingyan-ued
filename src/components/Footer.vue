@@ -5,7 +5,7 @@
           <li class="links_item"><a href="http://ik.hustonline.net" target="_blank">iKnow</a></li>
           <li class="links_item"><a href="http://tuhao.hustonline.net" target="_blank">华科土豪网</a></li>
           <li class="links_item"><a href="http://app.hustonline.net" target="_blank">大软坊</a></li>
-          <li class="links_item"><p class="copyright">Copyright &copy;{{m_year}} <a href="http://www.bingyan.net" target="_blank">冰岩作坊</a>. All Rights Reserved.</p></li>
+          <li class="links_item"><p class="copyright"><a href="http://www.bingyan.net" target="_blank">冰岩作坊</a> &copy;{{m_year}}. 保留所有权利.</p></li>
       </ul>
   </div>
 </template>

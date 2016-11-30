@@ -45,7 +45,6 @@ export default {
       line-height: 1;
       position: absolute;
       right:10px;
-      color: #333;
       bottom:0;
       font-size: 12px;
       &:before{

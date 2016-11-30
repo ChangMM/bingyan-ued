@@ -10,12 +10,12 @@
         <img src="http://newbbs.bingyan.net/assets/emojis/see_no_evil.png" class="emoji"/>
       </span>
     </div>
-    <div class="button-wrap">
-      <span class="button hollow-button">从作品库中选择</span>
-      <a href="/new.html"><span class="button solid-button">新建作品</span></a>
+    <div class="search-wrap clearfix">
+      <input type="text" class="search-input" v-model="m_search_title" placeholder="支持搜索标题/文章类别">
+      <a href="/new"><span class='button float-right'>新建作品</span></a>
     </div>
     <p class="sub-title">已发布</p>
-    <Articles :published='m_released' :refresh='f_get_released_articles'></Articles>
+    <Articles :published='m_released' :search='m_search_title' :refresh='f_get_released_articles'></Articles>
   </div>
 </template>
 
@@ -24,6 +24,7 @@ import Articles from './Articles'
 export default {
   data () {
     return {
+      m_search_title: '',
       m_released: []
     }
   },
@@ -69,35 +70,32 @@ export default {
       }
     }
   }
-  .button-wrap{
-    margin-top: 4px;
-    .button{
-      margin-right: 60px;
-      height: 34px;
-      line-height: 34px;
-      width:140px;
-      border:1px solid $bingyan-color;
-      cursor: pointer;
-      &.hollow-button{
-        color: $bingyan-color;
-        &:hover{
-          color: #fff;
-          background-color: darken($bingyan-color,5%);
-        }
-        &:active{
-          color: #fff;
-          background-color: darken($bingyan-color,10%);
-        }
+  .search-wrap{
+    margin-top:10px;
+    .search-input{
+      height:36px;
+      border:1px solid #ddd;
+      outline:none;
+      width:300px;
+      padding-left: 5px;
+      padding-right: 40px;
+      font-size: 14px;
+      border-radius: 4px;
+      &:focus{
+        border-color: $bingyan-color;
       }
-      &.solid-button{
-        color: #fff;
-        background-color: $bingyan-color;
-        &:hover{
-          background-color: darken($bingyan-color,5%);
-        }
-        &:active{
-          background-color: darken($bingyan-color,10%);
-        }
+    }
+    .button{
+      display: inline-block;
+      width:120px;
+      height:36px;
+      line-height: 36px;
+      border: 1px solid $bingyan-color;
+      cursor: pointer;
+      color:#fff;
+      background-color: $bingyan-color;
+      &:hover{
+        background-color: darken($bingyan-color,5%);
       }
     }
   }

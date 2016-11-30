@@ -112,7 +112,7 @@ export default {
 @import "../../scss/_varilables.scss";
 //输入框基本样式
 .by-input-default{
-  padding:5px;
+  padding:5px 0px 5px 10px;
   outline:none;
   border:1px solid $border-color;
   border-radius:2px;

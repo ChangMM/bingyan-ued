@@ -5,7 +5,7 @@
       <div class="line"></div>
     </div>
     <div class="search-wrap clearfix">
-      <input type="text" class="search-input" v-model="m_search_title" placeholder="输入标题文字">
+      <input type="text" class="search-input" v-model="m_search_title" placeholder="支持搜索标题/文章类别">
       <a href="/new"><span class='button float-right'>新建作品</span></a>
     </div>
     <div class="articles-wrap">
@@ -55,7 +55,7 @@ export default {
         return _.orderBy(this.m_libs, ['updateTime'], ['desc'])
       } else {
         return _.orderBy(this.m_libs, ['updateTime'], ['desc']).filter(function (lib) {
-          return lib.title.indexOf(self.m_search_title) !== -1
+          return (lib.title.indexOf(self.m_search_title) !== -1) || (lib.category_full_name.indexOf(self.m_search_title) !== -1)
         })
       }
     }

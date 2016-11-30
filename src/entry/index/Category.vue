@@ -23,11 +23,11 @@
             <span class="article-time">{{ article.check_date | timeFormat}}</span>
           </span>
           <span class="like icon">
-            <b class="fa fa-heart-o"></b>
+            <b class="iconfont icon-like1"></b>
             <b class="like-num">{{ article.like_num }}</b>
           </span>
           <span class="comment icon">
-            <b class="fa fa-comment-o"></b>
+            <b class="iconfont icon-comment"></b>
             <b class="comment-num">{{ article.comment_num }}</b>
           </span>
         </div>
@@ -89,7 +89,7 @@ export default {
 $article-width: 300px;
 $article-img-height: 200px;
 .articles-wrap{
-  padding-top: 30px;
+  padding-top: 10px;
   margin-right: -50px;
 }
 .no-articles{
@@ -197,6 +197,14 @@ $article-img-height: 200px;
     display: inline-block;
     vertical-align: middle;
     padding-left: 5px;
+    .iconfont{
+      font-size: 12px;
+      font-weight: normal;
+      margin-right: -2px;
+      &.icon-like1{
+        vertical-align: 1px;
+      }
+    }
     .fa{
       margin-right: -3px;
     }
