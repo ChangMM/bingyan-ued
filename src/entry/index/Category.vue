@@ -1,9 +1,6 @@
 <template lang="html">
-  <div class="articles-wrap clearfix">
-    <template v-if='m_articles.length === 0'>
-      <p class="no-articles">尚未发布任何文章：(</p>
-    </template>
-    <template v-else>
+  <div>
+    <div class="articles-wrap clearfix">
       <div class="ued-article" v-for="article in m_articles">
         <div class="article-img-wrap">
           <router-link :to="{ path: '/article/'+ article.article_id }">
@@ -32,16 +29,24 @@
           </span>
         </div>
       </div>
-    </template>
-
+    </div>
+    <div class="loading-wrap" v-show="m_loading">
+      <img src="../../assets/loading.gif" class="loading" alt="加载中">
+    </div>
+    <div class="more-wrap">
+      <span class="button more-button" v-on:click="f_get_more">{{ m_more_wrod }}</span>
+    </div>
   </div>
-
 </template>
 
 <script>
 export default {
   data () {
     return {
+      NUM: 10,
+      m_over: false,
+      m_loading: true,
+      m_more_wrod: '加载更多',
       m_articles: []
     }
   },
@@ -50,7 +55,7 @@ export default {
     this.f_get_articles()
   },
   watch: {
-    '$route': 'f_get_articles'
+    '$route': ['f_get_articles', 'f_ajust_args']
   },
   methods: {
     f_judge_router: function () {
@@ -62,20 +67,46 @@ export default {
         return false
       }
     },
+    f_ajust_args: function () {
+      this.m_loading = true
+      this.m_over = false
+      this.m_more_wrod = '加载更多'
+    },
+    f_get_more: function () {
+      if (this.m_over) {
+        return
+      }
+      let type = this.$route.params.type
+      this.m_more_wrod = '正在加载文章...'
+      this.$http.get('/api/category/' + type, {
+        params: {
+          offset: this.m_articles.length,
+          num: this.NUM
+        }
+      }).then(function (response) {
+        let body = response.body
+        if (body.status === 1) {
+          if (body.data.length === 0) {
+            this.m_over = true
+            this.m_more_wrod = '没有更多文章了'
+          } else {
+            this.m_articles = this.m_articles.concat(body.data)
+            this.m_more_wrod = '更多文章'
+          }
+        } else {
+          this.$warn(body.msg)
+        }
+      })
+    },
     f_get_articles: function () {
       if (!this.f_judge_router()) {
         this.$router.replace('/404')  // 这个要用replace 而不是push
       }
       let type = this.$route.params.type
       this.$http.get('/api/category/' + type).then(function (response) {
-        let body
-        try {
-          body = JSON.parse(response.body)
-        } catch (err) {
-          // console.warn(说明返回的已经是以json的格式的了)
-          body = response.body
-        }
+        let body = response.body
         this.m_articles = body.data
+        this.m_loading = false
       })
     }
   },
@@ -85,6 +116,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../scss/_varilables.scss';
+@import '../../scss/components/_button.scss';
 @import '../../scss/_mixin.scss';
 $article-width: 300px;
 $article-img-height: 200px;
@@ -208,6 +240,29 @@ $article-img-height: 200px;
     .fa{
       margin-right: -3px;
     }
+  }
+}
+.more-wrap{
+  text-align: center;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  .more-button{
+    width:200px;
+    border-radius: 4px;
+    line-height: 40px;
+    height:40px;
+    color: $bingyan-color;
+    border:1px solid $bingyan-color;
+    &:active{
+      background-color: $bingyan-color;
+      color: #fff;
+    }
+  }
+}
+.loading-wrap{
+  text-align: center;
+  .loading{
+    height:60px;
   }
 }
 </style>

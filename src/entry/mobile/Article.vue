@@ -4,7 +4,7 @@
           <div class="by-article-header">
               <h1 class="by-article-title">{{ m_article_title }}</h1>
               <div class="by-author-info">
-                <img class="by-avatar" v-bind:src="m_author_picture || '/static/img/default_avatar.png'" alt="作者头像"/>
+                <img class="by-avatar" v-bind:src="m_author_picture || '/static/img/default_avatar.jpg'" alt="作者头像"/>
                 <p class="name-and-time">
                   <a href="#" class="article-author author-name">{{ m_author_name }}</a>·<span class="article-time">{{ m_check_date | timeFormat }}</span>·<span class="comment-num">{{m_comment_num}}评论</span>
                   <span class="like-num">{{m_like_num}}喜欢</span>

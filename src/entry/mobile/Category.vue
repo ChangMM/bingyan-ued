@@ -3,7 +3,7 @@
     <div class="articles-wrap">
       <div class="article mobile-article" v-for='article in m_articles'>
         <router-link :to="{ path: '/article/'+ article.article_id }">
-          <img :src="article.cover||'/static/img/default_cover.png'" class="article-img" alt="文章名"/>
+          <img :src="article.cover||'/static/img/default_cover.jpeg'" class="article-img" alt="文章名"/>
         </router-link>
         <router-link :to="{ path: '/category/'+ article.category.toLowerCase() }" :class="'article-type ' + article.category.toLowerCase()">{{article.category_full_name}}</router-link>
         <div class="article-info">
@@ -24,7 +24,7 @@
     <div class="loading-wrap" v-show="m_loading">
       <img src="../../assets/loading.gif" class="loading" alt="加载中">
     </div>
-    <div class="more-wrap" v-show="m_more">
+    <div class="more-wrap">
       <span class="button more-button" v-on:click="f_get_more">{{ m_more_wrod }}</span>
     </div>
   </div>
@@ -35,7 +35,6 @@ export default {
     return {
       NUM: 5, // 移动端文章一次加载的数量
       m_loading: true,
-      m_more: true,
       m_over: false,
       m_more_wrod: '加载更多',
       m_articles: []
@@ -51,7 +50,6 @@ export default {
     f_ajust_args: function () {
       this.m_loading = true
       this.m_over = false
-      this.m_more = true
       this.m_more_wrod = '加载更多'
     },
     f_get_more: function () {
