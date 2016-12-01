@@ -1,7 +1,11 @@
 <template lang="html">
-  <div class="preview-mask">
+  <div class="preview-mask" @keyup.esc='f_close'>
     <img src="../assets/close.png" v-on:click='f_close' class="close" />
-    <div class="preview-wrap">
+    <div :class="['preview-wrap', {'mobile': !m_pc}]">
+      <div class="switch-wrap">
+        <span :class='["button", {"active": m_pc}]' v-on:click='f_switch_pc'>电脑端预览</span>
+        <span :class='["button", {"active": !m_pc}]' v-on:click='f_switch_mobile'>移动端预览</span>
+      </div>
       <div class="by-article">
           <div class="by-article-header">
               <h1 class="by-article-title">{{ article.title || '预览文章的标题' }}</h1>
@@ -29,13 +33,19 @@
 export default {
   data () {
     return {
-
+      m_pc: true
     }
   },
   props: ['article'],
   methods: {
     f_close: function () {
       this.$emit('close')
+    },
+    f_switch_pc: function () {
+      this.m_pc = true
+    },
+    f_switch_mobile: function () {
+      this.m_pc = false
     }
   }
 }
@@ -44,6 +54,7 @@ export default {
 <style lang="scss">
 @import '../scss/_varilables.scss';
 @import '../scss/_mixin.scss';
+@import '../scss/components/_button.scss';
 @import '../scss/editor/editor_article.scss';
 .preview-mask{
   position: fixed;
@@ -53,7 +64,7 @@ export default {
   height:100%;
   z-index: 9997;
   transition: background ease .6s;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.95);
   .close{
     height:20px;
     cursor: pointer;
@@ -64,21 +75,49 @@ export default {
 }
 .preview-wrap{
   width:650px;
-  padding: 30px;
-  margin:40px auto 0;
+  padding: 20px;
+  margin:0 auto 0;
+  transform: translateY(-50%);
+  top:50%;
   background-color: #fff;
   border-radius: 4px;
   box-shadow: 1px 1px 20px rgba(0,0,0,0.05),
               -1px -1px 20px rgba(0,0,0,0.05);
+  position: relative;
+  // @include transition-ease;
+  &.mobile{
+    width:360px;
+    .article-type{
+      display: none;
+    }
+  }
+  .switch-wrap{
+    position: absolute;
+    width:120px;
+    top:30px;
+    left: -120px;
+    .button{
+      border:1px solid $bingyan-color;
+      height:36px;
+      line-height: 36px;
+      width:100px;
+      color:$bingyan-color;
+      margin-bottom: 20px;
+      &.active{
+        background-color: $bingyan-color;
+        color:#fff;
+      }
+    }
+  }
 }
 .by-article{
   height:560px;
   overflow-y: auto;
   &::-webkit-scrollbar {
-    width: 4px;
+    width: 2px;
   }
   &::-webkit-scrollbar-thumb {
-    background-color: #ddd;
+    background-color: #eee;
   }
   &::-webkit-scrollbar-track {
     border:1px solid #eee;
@@ -89,7 +128,6 @@ export default {
   position: relative;
   border-bottom: 1px solid lighten($light-black,35%);
   .by-article-title{
-    line-height:60px;
     font-size: 24px;
     font-weight: bold;
   }

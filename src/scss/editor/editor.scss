@@ -66,7 +66,6 @@ $simditor-button-width: 30px;
     width: 100%;
     & > ul {
       margin: 0;
-      padding: 0 0 0 6px;
       list-style: none;
       & > li {
         position: relative;
@@ -77,7 +76,7 @@ $simditor-button-width: 30px;
           background: #cfcfcf;
           width: 1px;
           height: 16px;
-          margin: ($simditor-button-height - 18px) / 2 10px;
+          margin: ($simditor-button-height - 18px) / 2 6px;
           vertical-align: middle;
         }
         & > .toolbar-item {

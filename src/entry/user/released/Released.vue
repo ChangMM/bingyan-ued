@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="release-wrap">
     <div class="release-header">
-      作品发布
+      已发布的作品
       <div class="line"></div>
       <span class="tip">要知道
         <img src="http://newbbs.bingyan.net/assets/emojis/point_right.png" class="emoji"/>
@@ -14,7 +14,6 @@
       <input type="text" class="search-input" v-model="m_search_title" placeholder="支持搜索标题/文章类别">
       <a href="/new"><span class='button float-right'>新建作品</span></a>
     </div>
-    <p class="sub-title">已发布</p>
     <Articles :published='m_released' :search='m_search_title' :refresh='f_get_released_articles'></Articles>
   </div>
 </template>
@@ -98,8 +97,5 @@ export default {
         background-color: darken($bingyan-color,5%);
       }
     }
-  }
-  .sub-title{
-    margin-top: 30px;
   }
 </style>

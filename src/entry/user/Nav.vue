@@ -2,9 +2,10 @@
   <div class="menu-wrap">
     <dl class="menu">
       <dt class="menu-title">内容管理</dt>
-      <dd class="menu-item"><router-link :to="{path: '/released'}">发布的作品</router-link></dd>
-      <dd class="menu-item"><router-link :to="{path: '/checking'}">审核中的作品</router-link></dd>
-      <dd class="menu-item"><router-link :to="{path: '/rejected'}">被拒绝的作品</router-link></dd>
+      <dd class="menu-item"><router-link :to="{path: '/released'}">已发布</router-link></dd>
+      <dd class="menu-item"><router-link :to="{path: '/checking'}">审核中</router-link></dd>
+      <dd class="menu-item"><router-link :to="{path: '/rejected'}">被拒绝</router-link></dd>
+      <dd class="menu-item"><router-link :to="{path: '/draft'}">草稿箱</router-link></dd>
     </dl>
     <dl class="menu">
       <dt class="menu-title">设置</dt>

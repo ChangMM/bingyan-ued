@@ -33,8 +33,9 @@
       </div>
       <div class="editor-main">
         <div class="btn-group">
-          <span class="button save" v-on:click='f_save($event)'>保存</span>
-          <span class="button view" v-on:click='f_preview_article'>预览</span>
+          <span class="button save top-tip" data-tip="保存到草稿箱中" v-on:click='f_save($event)'>保存</span>
+          <span class="button save top-tip" data-tip="保存并发布文章" v-on:click='f_release($event)'>发布</span>
+          <span class="button view top-tip" data-tip="预览文章样式" v-on:click='f_preview_article'>预览</span>
         </div>
         <div class="title-wrap">
           <img src="../../assets/left.png" class="left" />
@@ -201,7 +202,7 @@ export default {
           let body = response.body
           if (body.status === 1) {
             this.m_aid = body.data
-            this.$warn('保存成功')
+            this.$warn('文章已保存到草稿箱中')
             currentTarget.innerHTML = '保存'
           } else {
             this.$warn('保存失败')
@@ -211,11 +212,10 @@ export default {
         })
       }
     },
-    f_save_release: function (event) {
+    f_release: function (event) {
       if (!this.f_check_article()) {
         return
       }
-      let self = this
       // 事件目标要及时保存
       let currentTarget = event.currentTarget
       this.$confirm().then(
@@ -225,42 +225,32 @@ export default {
           } else {
             currentTarget.classList.add('disable')
             currentTarget.innerHTML = '正在发布'
-            self.$http.post('/api/post', {
-              aid: self.m_aid,
-              csrf: self.$cookies()['csrf'] || '',
-              title: self.m_title,
-              digest: self.m_abbr,
-              words: self.m_content,
-              cover: self.m_cover
+            this.$http.post('/api/user/article/save', {
+              article_id: this.m_aid,
+              release: 1,
+              title: this.m_title,
+              intro: this.m_abbr,
+              cover: this.m_cover,
+              content: this.m_content,
+              category: this.m_category
             }).then((response) => {
               let body = response.body
-              if (body.error === 'ok') {
-                self.f_release(body.post.id)
-                currentTarget.innerHTML = '保存并发布'
+              if (body.status === 1) {
+                this.m_aid = body.data
+                this.$warn('文章发布成功')
+                currentTarget.innerHTML = '发布'
+                $(window).unbind('beforeunload')
+                setTimeout(function () {
+                  window.location.href = '/user#/checking'
+                }, 300)
               } else {
-                self.$warn('发布失败')
+                this.$warn('文章发布失败')
                 currentTarget.innerHTML = '请重试'
               }
               currentTarget.classList.remove('disable')
             })
           }
-        })
-    },
-    f_release: function (pid) {
-      this.$http.post('/api/publish/post', {
-        pid: pid
-      }).then((response) => {
-        let body = response.body
-        if (body.error === 'ok') {
-          this.$warn('发布文章成功', function () {
-            $(window).unbind('beforeunload')
-            window.location.href = '/main#!/release'
-          })
-        } else {
-          this.$warn('发布失败')
-          this.$warn(body.msg)
-        }
-      })
+        }.bind(this))
     },
     f_close_preview: function () {
       this.m_preview = false
@@ -340,6 +330,9 @@ export default {
       &.prev{
         color: #666;
         cursor: pointer;
+        &:hover{
+          color:#000;
+        }
       }
       &.now{
         color:#000;
@@ -498,12 +491,13 @@ export default {
       z-index: 2;
       .button{
         display: inline-block;
-        width:80px;
+        width:60px;
         height:30px;
         font-size: 12px;
         line-height: 30px;
         border: 1px solid $bingyan-color;
-        margin-left: 12px;
+        margin-left: 10px;
+        position: relative;
         &.firt-child{
           margin-left: 0;
         }
@@ -569,28 +563,5 @@ export default {
         font-size: 12px;
       }
     }
-    // #editor {
-    //   width:90%;
-    //   margin: 10px auto 0;
-    // 	max-height: 600px;
-    // 	height: 500px;
-    // 	padding: 4px;
-    //   color:#333;
-    // 	box-sizing: border-box;
-    // 	overflow-y: scroll;
-    // 	outline: none;
-    //   img{
-    //     max-width:100%;
-    //   }
-    // }
-    // #editor::-webkit-scrollbar {
-    //   width: 6px;
-    // }
-    // #editor::-webkit-scrollbar-thumb {
-    //   background-color: #ddd;
-    // }
-    // #editor::-webkit-scrollbar-track {
-    //   border:1px solid #eee;
-    // }
   }
 </style>

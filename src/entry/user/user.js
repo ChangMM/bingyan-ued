@@ -9,6 +9,7 @@ import Main from './Main.vue'
 import Released from './released/Released.vue'
 import Checking from './checking/Checking.vue'
 import Rejected from './rejected/Rejected.vue'
+import Draft from './draft/Draft.vue'
 import Account from './setting/Account.vue'
 let WarnPlugin = require('../../components/Warn/Warn.js')
 let ConfirmPlugin = require('../../components/Confirm/Confirm.js')
@@ -29,6 +30,7 @@ let routes = [
   {path: '/released', component: Released},
   {path: '/checking', component: Checking},
   {path: '/rejected', component: Rejected},
+  {path: '/draft', component: Draft},
   {path: '/setting', component: Account}
 ]
 let router = new VueRouter({
