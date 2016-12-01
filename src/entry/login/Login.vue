@@ -8,14 +8,14 @@
     <div class="login-form">
       <div :class="['input-row-wrap', {'active': m_focus_1}]">
         <label for="username"><i class="fa fa-envelope fa-lg"></i></label>
-        <input type="text" autocomplete='off' spellcheck='false' v-on:focus="f_focus(1)" v-model='m_username' v-on:blur="f_blur(1)" placeholder="冰岩企业邮箱"/>
+        <input type="text" autocomplete='off' spellcheck='false' v-on:focus="f_focus(1)" v-model='m_username' v-on:blur="f_blur(1)" @keyup.enter='f_login' placeholder="冰岩企业邮箱"/>
       </div>
       <div :class="['input-row-wrap', {'active': m_focus_2}]">
         <label for="password"><i class="fa fa-key fa-lg"></i></label>
-        <input type="password" autocomplete='off' v-on:focus="f_focus(2)" v-model='m_password' v-on:blur="f_blur(2)" placeholder="密码自己猜"/>
+        <input type="password" autocomplete='off' @keyup.enter='f_login' v-on:focus="f_focus(2)" v-model='m_password' v-on:blur="f_blur(2)" placeholder="密码自己猜"/>
       </div>
       <div class="input-row-wrap">
-        <input class="submit" type="button" v-on:click="f_login" v-model="m_input_word"/>
+        <input class="submit" type="button" @keyup.enter='f_login' v-on:click="f_login" v-model="m_input_word"/>
       </div>
     </div>
   </div>
@@ -50,11 +50,11 @@ export default {
       }
     },
     f_check_login: function () {
-      if (this.m_username.trim() === 0) {
+      if (this.m_username.trim() === '') {
         this.$warn('用户名不能为空')
         return false
       }
-      if (this.m_password.trim() === 0) {
+      if (this.m_password.trim() === '') {
         this.$warn('密码不能为空')
         return false
       }
@@ -65,7 +65,7 @@ export default {
         return
       }
       this.m_input_word = '正在登录'
-      this.$http.post('/login', {
+      this.$http.post('/api/login', {
         username: this.m_username,
         password: this.m_password
       }).then(function (response) {

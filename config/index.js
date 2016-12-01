@@ -29,13 +29,13 @@ module.exports = {
            '^/api': '/api'
          }
       },
-      '/login': {
-         target: 'http://localhost:5000',
-         changeOrigin: true,
-         pathRewrite: {
-           '^/login': '/gloin'
-         }
-      },
+      // '/login': {
+      //    target: 'http://localhost:5000',
+      //    changeOrigin: true,
+      //    pathRewrite: {
+      //      '^/login': '/gloin'
+      //    }
+      // },
       '/loginout': {
          target: 'http://localhost:5000',
          changeOrigin: true,
