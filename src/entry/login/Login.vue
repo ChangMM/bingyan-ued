@@ -7,11 +7,11 @@
     </div>
     <div class="login-form">
       <div :class="['input-row-wrap', {'active': m_focus_1}]">
-        <label for="username"><i class="fa fa-envelope fa-lg"></i></label>
+        <label for="username"><i class="iconfont icon-email"></i></label>
         <input type="text" autocomplete='off' spellcheck='false' v-on:focus="f_focus(1)" v-model='m_username' v-on:blur="f_blur(1)" @keyup.enter='f_login' placeholder="冰岩企业邮箱"/>
       </div>
       <div :class="['input-row-wrap', {'active': m_focus_2}]">
-        <label for="password"><i class="fa fa-key fa-lg"></i></label>
+        <label for="password"><i class="iconfont icon-key"></i></label>
         <input type="password" autocomplete='off' @keyup.enter='f_login' v-on:focus="f_focus(2)" v-model='m_password' v-on:blur="f_blur(2)" placeholder="密码自己猜"/>
       </div>
       <div class="input-row-wrap">
@@ -132,6 +132,9 @@ export default {
       left: 0;
       position: absolute;
       text-align: center;
+      .iconfont{
+        font-size: 20px;
+      }
     }
     &.active {
       color: $bingyan-color;

@@ -8,7 +8,7 @@
           </div>
           <div class="search-wrap" v-on:keyup.enter='f_search(m_keyword)'>
               <input type="text" class="search" name="key_word" v-model="m_keyword" autocomplete="off" placeholder="文章名/作者名"/>
-              <span class="fa fa-search search-icon icon" id="search" v-on:click="f_search(m_keyword)" ></span>
+              <span class="icon iconfont icon-icons01" id="search" v-on:click="f_search(m_keyword)" ></span>
           </div>
       </div>
   </div>
@@ -99,7 +99,7 @@ $search-height: 36px;
     height: $search-height;
     width: 40px;
     text-align: center;
-    font-size: 16px;
+    font-size: 20px;
     cursor: pointer;
     color: #fff;
     background-color: $bingyan-color;
