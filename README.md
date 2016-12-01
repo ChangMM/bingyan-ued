@@ -2,79 +2,20 @@
 
 > 冰岩UED前端代码
 
-## Build Setup
+## 须知
 
 ``` bash
-# install dependencies
+# 先npm安装相应的包
 npm install
 
-# serve with hot reload at localhost:8080
+# 服务将会在本地的localhost:9006启动
 npm run dev
 
-# build for production with minification
+# 开发环境的编译命令
 npm run build
 ```
-
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
-``` mysql
-下面是`category`这个表的结构
-+----+------+--------+-----------+
-| id | name | status | full_name |
-+----+------+--------+-----------+
-|  1 | PM   |      0 | 产品 PM   |
-|  2 | VD   |      0 | 设计 VD   |
-|  3 | ID   |      0 | 交互 ID   |
-|  4 | FE   |      0 | 前端 FE   |
-|  5 | RD   |      0 | 研发 RD   |
-+----+------+--------+-----------+
-```
+## 项目简介
 
-### 文章具体的字段有
-```
-mysql> desc article;
-+--------------+--------------+------+-----+-------------------+-----------------------------+
-| Field        | Type         | Null | Key | Default           | Extra                       |
-+--------------+--------------+------+-----+-------------------+-----------------------------+
-| article_id   | int(8)       | NO   | PRI | NULL              | auto_increment              |
-| title        | varchar(128) | NO   |     | NULL              |                             |
-| author_id    | int(4)       | NO   |     | NULL              |                             |
-| category     | int(2)       | NO   |     | NULL              |                             |
-| content      | text         | NO   |     | NULL              |                             |
-| cover        | varchar(128) | NO   |     | NULL              |                             |
-| article_date | date         | YES  |     | NULL              |                             |
-| like_num     | int(8)       | NO   |     | 0                 |                             |
-| comment_num  | int(8)       | NO   |     | 0                 |                             |
-| share_num    | int(8)       | NO   |     | 0                 |                             |
-| status       | int(2)       | NO   |     | 0                 |                             |
-| check_date   | timestamp    | NO   |     | CURRENT_TIMESTAMP | on update CURRENT_TIMESTAMP |
-| intro        | varchar(128) | NO   |     | NULL              |                             |
-+--------------+--------------+------+-----+-------------------+-----------------------------+
-```
-```
-mysql> desc user;
-+-------------------+---------------+------+-----+------------------------+----------------+
-| Field             | Type          | Null | Key | Default                | Extra          |
-+-------------------+---------------+------+-----+------------------------+----------------+
-| uid               | int(4)        | NO   | PRI | NULL                   | auto_increment |
-| nickname          | varchar(64)   | NO   |     | NULL                   |                |
-| sex               | enum('M','F') | YES  |     | M                      |                |
-| birthday          | date          | YES  |     | 2000-01-01             |                |
-| picture           | varchar(64)   | YES  |     | NULL                   |                |
-| rank              | int(2)        | NO   |     | 0                      |                |
-| personal_homepage | varchar(64)   | YES  |     | /static/img/shiyan.jpg |                |
-+-------------------+---------------+------+-----+------------------------+----------------+
-
-mysql> desc user_login;
-+----------+-------------+------+-----+---------+----------------+
-| Field    | Type        | Null | Key | Default | Extra          |
-+----------+-------------+------+-----+---------+----------------+
-| uid      | int(4)      | NO   | PRI | NULL    | auto_increment |
-| email    | varchar(32) | NO   |     | NULL    |                |
-| password | varchar(32) | NO   |     | NULL    |                |
-+----------+-------------+------+-----+---------+----------------+
-
-```
-### 开发过程中的bug
-* 1、路由钩子的绑定问题
-* 2、transition过渡钩子的绑定问题
+前端采用的是 `vue2.0` 进行开发的。 也是字VUE发布之后第一次用 `vue2.0` 开发的一个比较完整的项目， 也算是自己半独立设计，并且独立完成前后端的一个项目。暂时还未放到线上。可以放下项目的一些截图。还是蛮好看的。 :see_no_evil:
