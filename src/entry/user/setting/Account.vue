@@ -15,6 +15,11 @@
         <span>{{m_nickname}}<span/>
         <span class="float-right alter" v-on:click='f_show_name_panel'>修改</span>
       </div>
+      <div class="input-wrap">
+        <label for="avatar">登陆密码</label>
+        <span>********<span/>
+        <span class="float-right alter" v-on:click='f_show_password_panel'>修改</span>
+      </div>
       <div class="input-wrap textarea-wrap">
         <label for="avatar">个人主页</label>
         <span class="mult-line">{{m_homepage}}</span>
@@ -30,6 +35,7 @@
     <intro-panel v-show="m_intro_panel_show" :refresh='f_get_user_info' :content='m_intro' v-on:close='f_close_intro_panel'> </intro-panel>
     <name-panel v-show="m_name_panel_show" :refresh='f_get_user_info' :content='m_nickname' v-on:close='f_close_name_panel'> </name-panel>
     <home-panel v-show="m_home_panel_show" :refresh='f_get_user_info' :content='m_homepage' v-on:close='f_close_home_panel'> </home-panel>
+    <password-panel v-show="m_password_show" v-on:close='f_close_password_panel'> </password-panel>
   </div>
 </template>
 
@@ -38,6 +44,7 @@ import AvatarPanel from './AvatarPanel.vue'
 import IntroPanel from './IntroPanel.vue'
 import NamePanel from './NamePanel.vue'
 import HomePanel from './HomePanel.vue'
+import PasswordPanel from './Password.vue'
 export default {
   data () {
     return {
@@ -45,6 +52,7 @@ export default {
       m_intro_panel_show: false,
       m_name_panel_show: false,
       m_home_panel_show: false,
+      m_password_show: false,
       m_avatar: '',
       m_nickname: '',
       m_homepage: '',
@@ -89,13 +97,20 @@ export default {
     },
     f_close_home_panel: function () {
       this.m_home_panel_show = false
+    },
+    f_show_password_panel: function () {
+      this.m_password_show = true
+    },
+    f_close_password_panel: function () {
+      this.m_password_show = false
     }
   },
   components: {
     AvatarPanel,
     IntroPanel,
     NamePanel,
-    HomePanel
+    HomePanel,
+    PasswordPanel
   }
 }
 </script>
