@@ -33,6 +33,9 @@
         <span class="nav" v-on:click ='f_go("rd")'>
           <span class="zh_cn">研发</span> <span class="us_en">RD</span>
         </span>
+        <span class="nav" v-on:click ='f_go("op")'>
+          <span class="zh_cn">运营</span> <span class="us_en">OP</span>
+        </span>
         <a class="nav" href="http://www.bingyan.net" target='_blank'>
           <span class="zh_cn">关于我们</span><span class="us_en">ABOUT US</span>
         </a>

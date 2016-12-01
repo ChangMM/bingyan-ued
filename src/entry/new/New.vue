@@ -18,11 +18,12 @@
         <div class="cover-wrap">
           <p class="cover-tip tip">类型</p>
           <div class="article-type-wrap" v-on:click="f_choose_type($event)">
-            <span class="article-type pm" :class="{'active': m_category=='pm'}" data-category='pm'>PM 产品</span>
-            <span class="article-type vd" :class="{'active': m_category=='vd'}" data-category='vd'>VD 视觉</span>
-            <span class="article-type id" :class="{'active': m_category=='id'}" data-category='id'>ID 设计</span>
-            <span class="article-type fe" :class="{'active': m_category=='fe'}" data-category='fe'>FE 前端</span>
-            <span class="article-type rd" :class="{'active': m_category=='rd'}" data-category='rd'>RD 研发</span>
+            <span class="article-type pm" :class="{'active': m_category=='pm'}" data-category='pm'>产品 PM</span>
+            <span class="article-type vd" :class="{'active': m_category=='vd'}" data-category='vd'>视觉 VD</span>
+            <span class="article-type id" :class="{'active': m_category=='id'}" data-category='id'>设计 ID</span>
+            <span class="article-type fe" :class="{'active': m_category=='fe'}" data-category='fe'>前端 FE</span>
+            <span class="article-type rd" :class="{'active': m_category=='rd'}" data-category='rd'>研发 RD</span>
+            <span class="article-type op" :class="{'active': m_category=='op'}" data-category='op'>运营 OP</span>
           </div>
         </div>
         <div class="abbr-cover">
@@ -242,7 +243,7 @@ export default {
                 $(window).unbind('beforeunload')
                 setTimeout(function () {
                   window.location.href = '/user#/checking'
-                }, 300)
+                }, 800)
               } else {
                 this.$warn('文章发布失败')
                 currentTarget.innerHTML = '请重试'

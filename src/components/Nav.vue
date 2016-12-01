@@ -23,6 +23,9 @@
         <router-link :to="{ path: '/category/rd'}" class="nav">
           <span class="zh_cn">研发</span> <span class="us_en">RD</span>
         </router-link>
+        <router-link :to="{ path: '/category/op'}" class="nav">
+          <span class="zh_cn">运营</span> <span class="us_en">OP</span>
+        </router-link>
         <a href="http://www.bingyan.net" target="_blank" class="nav">
           <span class="zh_cn">关于我们</span><span class="us_en">ABOUT US</span>
         </a>

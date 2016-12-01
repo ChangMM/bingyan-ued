@@ -79,7 +79,7 @@ export default {
       })
     },
     f_judge_router: function () {
-      let routes = ['all', 'pm', 'vd', 'id', 'fe', 'rd']
+      let routes = ['all', 'pm', 'vd', 'id', 'fe', 'rd', 'op']
       let type = this.$route.params.type
       if (routes.indexOf(type) !== -1) {
         return true
