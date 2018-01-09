@@ -29,9 +29,9 @@
       </template>
       <template v-if="m_libs==0">
         <p class="no-article">
-          <img src="http://newbbs.bingyan.net/assets/emojis/see_no_evil.png" class="emoji"/>
+          <img src="https://newbbs.bingyan.net/assets/emojis/see_no_evil.png" class="emoji"/>
           暂无内容
-          <img src="http://newbbs.bingyan.net/assets/emojis/see_no_evil.png" class="emoji"/>
+          <img src="https://newbbs.bingyan.net/assets/emojis/see_no_evil.png" class="emoji"/>
         </p>
       </template>
     </div>

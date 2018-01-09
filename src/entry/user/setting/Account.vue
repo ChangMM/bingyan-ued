@@ -12,12 +12,12 @@
       </div>
       <div class="input-wrap">
         <label for="avatar">名称</label>
-        <span>{{m_nickname}}<span/>
+        <span>{{m_nickname}}</span>
         <span class="float-right alter" v-on:click='f_show_name_panel'>修改</span>
       </div>
       <div class="input-wrap">
         <label for="avatar">登陆密码</label>
-        <span>********<span/>
+        <span>********</span>
         <span class="float-right alter" v-on:click='f_show_password_panel'>修改</span>
       </div>
       <div class="input-wrap textarea-wrap">

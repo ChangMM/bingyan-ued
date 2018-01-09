@@ -131,7 +131,7 @@ export default function (Vue) {
 
   Vue.prototype.$formatEmoji = function (content) {
     return content.replace(/:([a-z_]+):/g, function (str, $1) {
-      return '<img src="http://newbbs.bingyan.net/assets/emojis/' + $1 + '.png" class="emoji" title="' + str + '">'
+      return '<img src="https://newbbs.bingyan.net/assets/emojis/' + $1 + '.png" class="emoji" title="' + str + '">'
     })
   }
 }

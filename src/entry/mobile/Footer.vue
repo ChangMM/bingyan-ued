@@ -1,11 +1,13 @@
 <template lang="html">
   <div class="footer">
       <ul class="links">
-          <li class="links_item"><a href="http://www.2shoujie.com" target="_blank">校园二手街</a></li>
-          <li class="links_item"><a href="http://ik.hustonline.net" target="_blank">iKnow</a></li>
-          <li class="links_item"><a href="http://tuhao.hustonline.net" target="_blank">华科土豪网</a></li>
+          <!-- <li class="links_item"><a href="http://www.2shoujie.com" target="_blank">校园二手街</a></li> -->
+          <!-- <li class="links_item"><a href="http://ik.hustonline.net" target="_blank">iKnow</a></li> -->
+          <!-- <li class="links_item"><a href="http://tuhao.hustonline.net" target="_blank">华科土豪网</a></li> -->
+          <li class="links_item"><a href="https://weibo.com/3897687414/profile" target="_blank">关于作者</a></li>
+          <li class="links_item"><a href="https://hr.bingyan.net" target="_blank">冰岩招新</a></li>
           <br>
-          <li class="links_item"><p class="copyright"><a href="http://www.bingyan.net" target="_blank">冰岩作坊</a>&copy;{{m_year}}. 保留所有权利.</p></li>
+          <li class="links_item"><p class="copyright"><a href="https://www.bingyan.net" target="_blank">冰岩作坊</a>&copy;{{m_year}}. 保留所有权利.</p></li>
       </ul>
   </div>
 </template>

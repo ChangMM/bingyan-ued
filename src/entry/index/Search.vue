@@ -1,14 +1,14 @@
 <template lang="html">
   <div class="articles-wrap clearfix">
     <template v-if='m_articles.length === 0'>
-      <p class="no-articles"> <img src="http://newbbs.bingyan.net/assets/emojis/fearful.png" class="emoji"/>未搜索到有关 <span class="keyword">『{{m_keyword}}』</span> 的文章：(</p>
+      <p class="no-articles"> <img src="https://newbbs.bingyan.net/assets/emojis/fearful.png" class="emoji"/>未搜索到有关 <span class="keyword">『{{m_keyword}}』</span> 的文章：(</p>
     </template>
     <template v-else>
       <p class="search-result">
-        <img src="http://newbbs.bingyan.net/assets/emojis/sunglasses.png" class="emoji"/>
+        <img src="https://newbbs.bingyan.net/assets/emojis/sunglasses.png" class="emoji"/>
         有关 <span class="keyword"> 『{{ m_keyword }}』 </span>搜索结果是
-        <img src="http://newbbs.bingyan.net/assets/emojis/point_down.png" class="emoji"/>
-        <img src="http://newbbs.bingyan.net/assets/emojis/point_down.png" class="emoji"/>
+        <img src="https://newbbs.bingyan.net/assets/emojis/point_down.png" class="emoji"/>
+        <img src="https://newbbs.bingyan.net/assets/emojis/point_down.png" class="emoji"/>
       </p>
       <div class="ued-article" v-for="article in m_articles">
         <div class="article-img-wrap">

@@ -82,12 +82,12 @@ export default {
   },
   methods: {
     f_init_share: function (cover, word) {
-      let title = document.querySelector('title')
-      let img = document.querySelector('#share-img')
+      // let title = document.querySelector('title')
+      // let img = document.querySelector('#share-img')
       let weibo = document.querySelector('#share-to-weibo')
-      let imageURL = 'http://ued.bingyan.net' + cover
-      title.innerHTML = word
-      img.setAttribute('src', imageURL)
+      let imageURL = 'https://ued.bingyan.net' + cover
+      // title.innerHTML = word
+      // img.setAttribute('src', imageURL)
       weibo.setAttribute('href', 'http://service.weibo.com/share/share.php?url=' + encodeURIComponent(window.location.href) + '&title=' + encodeURIComponent('冰岩UED，可能是高校中最好的互联网团队博客 |' + word) + '&pic=' + encodeURIComponent(imageURL) + '&appkey=bingyan')
     },
     f_get_article: function () {

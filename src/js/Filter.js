@@ -40,7 +40,7 @@ export default function (Vue) {
     // 处理评论区的表情
     Vue.filter('emojiFormat', function (value) {
       return value.replace(/:([a-z_]+):/g, function (str, $1) {
-        return '<img src="http://newbbs.bingyan.net/assets/emojis/' + $1 + '.png" class="emoji" title="' + str + '">'
+        return '<img src="https://newbbs.bingyan.net/assets/emojis/' + $1 + '.png" class="emoji" title="' + str + '">'
       })
     })
   }

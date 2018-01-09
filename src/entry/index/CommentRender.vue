@@ -16,12 +16,12 @@
     <template v-else>
       <p class="comment-header">暂时没有评论</p>
       <div class="no-comments">
-        <img class="emoji" src="http://newbbs.bingyan.net/assets/emojis/point_right.png"></img>
-        <img class="emoji" src="http://newbbs.bingyan.net/assets/emojis/point_right.png"></img>
+        <img class="emoji" src="https://newbbs.bingyan.net/assets/emojis/point_right.png"></img>
+        <img class="emoji" src="https://newbbs.bingyan.net/assets/emojis/point_right.png"></img>
         快来抢沙发吧
-        <img class="emoji" src="http://newbbs.bingyan.net/assets/emojis/see_no_evil.png"></img>
-        <img class="emoji" src="http://newbbs.bingyan.net/assets/emojis/point_left.png"></img>
-        <img class="emoji" src="http://newbbs.bingyan.net/assets/emojis/point_left.png"></img>
+        <img class="emoji" src="https://newbbs.bingyan.net/assets/emojis/see_no_evil.png"></img>
+        <img class="emoji" src="https://newbbs.bingyan.net/assets/emojis/point_left.png"></img>
+        <img class="emoji" src="https://newbbs.bingyan.net/assets/emojis/point_left.png"></img>
       </div>
     </template>
 </div>
