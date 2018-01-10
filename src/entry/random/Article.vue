@@ -96,6 +96,7 @@ export default {
     position: relative;
     background-color: #fff;
     overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
     .loading-img{
       position: absolute;
       top:160px;
@@ -118,12 +119,13 @@ export default {
     .article-author{
       color: #666;
       text-align: center;
+      font-size: 15px;
       padding: 10px;
       border-bottom: 1px dashed #eee;
     }
     .article-content{
       color: #555;
-      font-size: 13px;
+      font-size: 15px;
       line-height: 1.6;
       margin-top: 10px;
       p{
