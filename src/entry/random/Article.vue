@@ -148,14 +148,18 @@ export default {
       width: 100px;
       height: 28px;
       color: #666;
+      cursor: pointer;
       line-height: 28px;
       border-radius: 4px;
       display: inline-block;
       background-color: #f4f4f4;
       border: 1px solid #eee;
       font-size: 12px;
+      &:hover{
+        background-color: darken(#f4f4f4, 3%);
+      }
       &:active{
-        background-color: darken(#f4f4f4, 5%);
+        background-color: darken(#f4f4f4, 6%);
       }
     }
   }

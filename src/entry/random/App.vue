@@ -31,6 +31,8 @@ a{
 }
 #app {
   height: 100%;
+  max-width: 600px;
+  margin: auto;
   font-size: 14px;
   line-height: 1.5;
   letter-spacing: 1.5px;
