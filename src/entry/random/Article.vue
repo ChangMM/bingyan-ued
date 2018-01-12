@@ -2,7 +2,7 @@
   <div class="article-page" id="random-article">
     <div class="page-top"></div>
     <div class="page-bottom"></div>
-    <div class="article-wrap">
+    <div class="article-wrap" ref="article">
       <img src="/static/img/loading.gif" v-if="m_title == ''" class="loading-img" alt="加载中">
       <h1 class="article-title">{{m_title}}</h1>
       <p class="article-author">{{m_author}}</p>
@@ -55,6 +55,7 @@ export default {
         this.m_title = body.data.title
         this.m_author = body.data.author
         this.m_content = body.data.content
+        this.$refs.article.scrollTop = 0
       })
     }
   }
