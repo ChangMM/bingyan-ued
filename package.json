@@ -39,7 +39,7 @@
     "html-webpack-plugin": "^2.8.1",
     "http-proxy-middleware": "^0.17.2",
     "json-loader": "^0.5.4",
-    "lodash": "^4.17.2",
+    "lodash": "^4.17.4",
     "node-sass": "^3.12.5",
     "opn": "^4.0.2",
     "ora": "^0.3.0",

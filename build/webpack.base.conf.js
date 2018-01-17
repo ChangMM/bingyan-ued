@@ -18,7 +18,8 @@ module.exports = {
     user: './src/entry/user/user.js',
     mobile: './src/entry/mobile/mobile.js',
     new: './src/entry/new/new.js',
-    random: './src/entry/random/random.js'
+    random: './src/entry/random/random.js',
+    extension: './src/entry/extension/extension.js'
   },
   output: {
     path: config.build.assetsRoot,

@@ -50,6 +50,12 @@ module.exports = merge(baseWebpackConfig, {
       chunks:['random']
     }),
     new HtmlWebpackPlugin({
+      filename: 'extension.html',
+      template: 'extension.html',
+      inject: true,
+      chunks:['extension']
+    }),
+    new HtmlWebpackPlugin({
       filename: 'new.html',
       template: 'new.html',
       inject: true,
